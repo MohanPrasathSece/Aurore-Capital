@@ -31,7 +31,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.05 }}
-          className="mx-auto mt-6 max-w-5xl text-center font-display text-xl font-extrabold leading-[1.02] tracking-[-0.03em] text-ink sm:text-2xl md:text-4xl lg:text-5xl"
+          className="mx-auto mt-6 max-w-5xl text-center font-display text-3xl font-extrabold leading-[1.02] tracking-[-0.03em] text-ink sm:text-4xl md:text-6xl lg:text-7xl"
         >
           Tradez la crypto plus intelligemment
           <br />
