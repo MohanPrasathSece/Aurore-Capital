@@ -83,6 +83,7 @@ function Dashboard() {
           phone: formData.get("phone") as string,
           message: formData.get("message") as string,
         })
+      });
       if (!res.ok) throw new Error("Failed");
       
       // Simulate processing time
