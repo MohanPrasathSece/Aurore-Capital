@@ -1,6 +1,6 @@
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
 import { TrendingUp, ShieldCheck, Activity, Bitcoin, Zap } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export function DemoSection() {
   const [pnl, setPnl] = useState(24180);
@@ -19,7 +19,7 @@ export function DemoSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-24 bg-background">
+    <section id="performance" className="relative overflow-hidden py-24 bg-background">
       <div className="container-page relative">
         <div className="mx-auto max-w-3xl text-center mb-16">
           <h2 className="font-display text-4xl font-bold tracking-tight text-ink md:text-5xl">

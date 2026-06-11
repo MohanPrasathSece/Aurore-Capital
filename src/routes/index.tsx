@@ -5,6 +5,7 @@ import { Features } from "@/components/site/Features";
 import { Testimonials } from "@/components/site/Testimonials";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Faq } from "@/components/site/Faq";
+import { Pricing } from "@/components/site/Pricing";
 import { Footer } from "@/components/site/Footer";
 import { ScrollTop } from "@/components/site/ScrollTop";
 import { FadeInUp } from "@/components/site/FadeInUp";
@@ -52,6 +53,7 @@ function Index() {
       <FadeInUp><Features /></FadeInUp>
       <FadeInUp><Testimonials /></FadeInUp>
       <FadeInUp><Faq /></FadeInUp>
+      <FadeInUp><Pricing /></FadeInUp>
       <FadeInUp><CtaBand /></FadeInUp>
       <Footer />
       <ScrollTop />

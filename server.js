@@ -237,76 +237,7 @@ app.get('/api/x-secure-admin/data/contacts', (req, res) => {
   res.json({ base64: buf.toString('base64') });
 });
 
-app.get('/api/x-secure-admin/data/affiliates', async (req, res) => {
-  if (req.query.key !== 'aurore-admin-2026') return res.status(403).json({ error: 'Unauthorized' });
-  
-  const { start_date, end_date } = req.query;
-  if (!start_date || !end_date) {
-    return res.status(400).json({ error: 'start_date and end_date are required (format: DD.MM.YYYY)' });
-  }
 
-  try {
-    // Some poorly designed APIs require form-data body on GET requests.
-    // We try query parameters first as it's standard, but if the API specifically needs form-data, we use http module.
-    // To make it fully compliant with the prompt's Postman example, we'll manually construct a multipart body with https.
-    
-    const boundary = '----WebKitFormBoundary' + Math.random().toString(36).substring(2);
-    let body = '';
-    body += `--${boundary}\r\nContent-Disposition: form-data; name="start_date"\r\n\r\n${start_date}\r\n`;
-    body += `--${boundary}\r\nContent-Disposition: form-data; name="end_date"\r\n\r\n${end_date}\r\n`;
-    body += `--${boundary}--\r\n`;
-
-    const url = new URL(process.env.CRM_API_URL);
-    const options = {
-      hostname: url.hostname,
-      port: url.port || (url.protocol === 'https:' ? 443 : 80),
-      path: url.pathname + url.search,
-      method: 'GET',
-      headers: {
-        'authorization': process.env.CRM_API_TOKEN_GET,
-        'Content-Type': `multipart/form-data; boundary=${boundary}`,
-        'Content-Length': Buffer.byteLength(body)
-      }
-    };
-
-    const request = https.request(options, (response) => {
-      let data = '';
-      response.on('data', (chunk) => { data += chunk; });
-      response.on('end', () => {
-        try {
-          const parsed = JSON.parse(data);
-          
-          // Convert JSON to Excel
-          const wb = xlsx.utils.book_new();
-          const ws = xlsx.utils.json_to_sheet(Array.isArray(parsed) ? parsed : (parsed.data || [parsed]));
-          xlsx.utils.book_append_sheet(wb, ws, 'Affiliates');
-          const buf = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
-          
-          res.json({ base64: buf.toString('base64') });
-        } catch (e) {
-          // If not JSON or empty, just return empty sheet
-          const wb = xlsx.utils.book_new();
-          const ws = xlsx.utils.json_to_sheet([{ raw: data }]);
-          xlsx.utils.book_append_sheet(wb, ws, 'Affiliates');
-          const buf = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
-          res.json({ base64: buf.toString('base64') });
-        }
-      });
-    });
-
-    request.on('error', (error) => {
-      console.error('CRM GET Error:', error);
-      res.status(500).json({ error: 'Failed to fetch from CRM' });
-    });
-
-    request.write(body);
-    request.end();
-
-  } catch (err) {
-    console.error('CRM fetch error:', err);
-    res.status(500).json({ error: 'Internal server error during CRM fetch' });
-  }
-});
 
 app.listen(PORT, () => {
   console.log(`Express server running on http://localhost:${PORT}`);

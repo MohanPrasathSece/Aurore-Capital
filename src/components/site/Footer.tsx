@@ -31,9 +31,24 @@ export function Footer() {
             </div>
           </div>
 
-          <Col title="Produit" links={["Signaux", "Bot de trading", "Gestion des risques", "Analytique"]} />
-          <Col title="Entreprise" links={["À propos", "Carrières", "Presse", "Contact"]} />
-          <Col title="Légal" links={["Politique de confidentialité", "Conditions d'utilisation", "Avertissement sur les risques", "Cookies"]} />
+          <Col title="Produit" links={[
+            { label: "Signaux", href: "#features" },
+            { label: "Bot de trading", href: "#performance" },
+            { label: "Gestion des risques", href: "#features" },
+            { label: "Analytique", href: "#performance" }
+          ]} />
+          <Col title="Entreprise" links={[
+            { label: "À propos", href: "#" },
+            { label: "Carrières", href: "#" },
+            { label: "Presse", href: "#" },
+            { label: "Contact", href: "/contact" }
+          ]} />
+          <Col title="Légal" links={[
+            { label: "Politique de confidentialité", href: "#" },
+            { label: "Conditions d'utilisation", href: "#" },
+            { label: "Avertissement sur les risques", href: "#" },
+            { label: "Cookies", href: "#" }
+          ]} />
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-black/5 pt-8 text-sm text-ink-soft md:flex-row">
@@ -48,15 +63,15 @@ export function Footer() {
   );
 }
 
-function Col({ title, links }: { title: string; links: string[] }) {
+function Col({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
     <div>
       <p className="text-base font-semibold text-ink">{title}</p>
       <ul className="mt-4 space-y-3">
         {links.map((l) => (
-          <li key={l}>
-            <a href="#" className="text-base text-ink-soft transition-colors hover:text-ink">
-              {l}
+          <li key={l.label}>
+            <a href={l.href} onClick={(e) => l.href === "#" && e.preventDefault()} className="text-base text-ink-soft transition-colors hover:text-ink">
+              {l.label}
             </a>
           </li>
         ))}

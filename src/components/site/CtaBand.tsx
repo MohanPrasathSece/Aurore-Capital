@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-
+import { Link } from "@tanstack/react-router";
 export function CtaBand() {
   return (
     <section className="py-20">
@@ -16,13 +16,13 @@ export function CtaBand() {
               Rejoignez plus de 50 000 traders qui utilisent Aurore Capital pour capturer chaque mouvement — sur chaque marché, 24 heures sur 24.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a
-                href="#start"
+              <Link
+                search={{ auth: "signup" }}
                 className="group inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 text-base font-semibold text-ink transition-transform hover:-translate-y-0.5"
               >
                 Démarrer l'essai gratuit
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
+              </Link>
               <a
                 href="#pricing"
                 className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-7 py-4 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white/15"

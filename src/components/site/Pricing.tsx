@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-
+import { Link } from "@tanstack/react-router";
 const plans = [
   {
     name: "Starter", price: "49", desc: "Parfait pour les nouveaux traders qui se lancent.",
@@ -72,15 +72,17 @@ export function Pricing() {
                 ))}
               </ul>
 
-              <button
-                className={`mt-8 w-full rounded-full px-6 py-3.5 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${
+              <Link
+                to={p.name === "Enterprise" ? "/contact" : "/"}
+                search={p.name !== "Enterprise" ? { auth: "signup" } : undefined}
+                className={`mt-8 w-full text-center inline-block rounded-full px-6 py-3.5 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${
                   p.highlight
                     ? "bg-white text-ink"
                     : "bg-ink text-white"
                 }`}
               >
                 {p.name === "Enterprise" ? "Contacter les ventes" : "Commencer"}
-              </button>
+              </Link>
             </div>
           ))}
         </div>

@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { ArrowUpRight, TrendingUp, ShieldCheck, Activity, Bitcoin, Sparkles, Zap } from "lucide-react";
 import { CryptoTicker } from "./CryptoTicker";
+import { Link } from "@tanstack/react-router";
 
 export function Hero() {
   return (
@@ -54,13 +55,13 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.25 }}
           className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
-          <a
-            href="#start"
+          <Link
+            search={{ auth: "signup" }}
             className="group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-4 text-base font-semibold text-white shadow-elevated transition-transform hover:-translate-y-0.5"
           >
             Commencer
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
+          </Link>
           <a
             href="#performance"
             className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-7 py-4 text-base font-semibold text-ink shadow-card transition-colors hover:bg-secondary"
