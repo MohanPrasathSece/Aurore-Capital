@@ -60,8 +60,8 @@ export function AuthModal({
   };
 
   return (
-    <div className="fixed inset-0 z-[100] grid place-items-center bg-black/40 p-4 backdrop-blur-xl">
-      <div className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-primary/10 bg-background p-10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)]">
+    <div className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-black/40 p-4 backdrop-blur-xl">
+      <div className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-primary/10 bg-background p-6 sm:p-10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)]">
         <button
           onClick={onClose}
           className="absolute right-4 top-4 grid h-8 w-8 place-items-center rounded-full bg-black/5 text-ink hover:bg-black/10"

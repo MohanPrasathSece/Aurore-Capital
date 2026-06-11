@@ -4,7 +4,7 @@ export function CtaBand() {
   return (
     <section className="py-20">
       <div className="container-page">
-        <div className="relative overflow-hidden rounded-[40px] bg-gradient-to-br from-[#0F172A] via-[#221b4b] to-[#3b1d6e] p-12 text-white md:p-20">
+        <div className="relative overflow-hidden rounded-[40px] bg-gradient-to-br from-[#0F172A] via-[#221b4b] to-[#3b1d6e] p-8 md:p-16 lg:p-20 text-white">
           <div className="pointer-events-none absolute inset-0 [background:radial-gradient(50%_60%_at_80%_20%,rgba(192,132,252,0.35),transparent_60%),radial-gradient(40%_50%_at_10%_80%,rgba(124,92,255,0.35),transparent_60%)]" />
           <div className="relative mx-auto max-w-3xl text-center">
             <h2 className="font-display text-3xl font-bold leading-[1.05] tracking-tight md:text-4xl lg:text-5xl">

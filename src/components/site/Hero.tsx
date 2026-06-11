@@ -25,7 +25,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.05 }}
-          className="mx-auto mt-6 max-w-5xl text-center font-display text-[42px] font-extrabold leading-[1.02] tracking-[-0.03em] text-ink md:text-[64px] lg:text-[80px]"
+          className="mx-auto mt-6 max-w-5xl text-center font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.03em] text-ink sm:text-5xl md:text-[64px] lg:text-[80px]"
         >
           Trade Crypto Smarter
           <br />

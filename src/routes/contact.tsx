@@ -52,7 +52,7 @@ function Contact() {
         <div className="container-page relative">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gradient">Contact</p>
-            <h1 className="mt-4 font-display text-5xl font-extrabold tracking-tight text-ink md:text-6xl lg:text-[80px] lg:leading-[1.02]">
+            <h1 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-[80px] lg:leading-[1.02]">
               Let's talk <span className="text-gradient">trading.</span>
             </h1>
           </div>
@@ -66,7 +66,7 @@ function Contact() {
                 </ul>
               </div>
             </div>
-            <form onSubmit={handleSubmit} className="rounded-3xl border border-primary/10 bg-white p-8 shadow-elevated md:p-10">
+            <form onSubmit={handleSubmit} className="rounded-3xl border border-primary/10 bg-white p-6 sm:p-8 shadow-elevated md:p-10">
               {success ? (
                 <div className="text-center py-12">
                   <h3 className="text-2xl font-bold text-ink">Message Sent!</h3>
