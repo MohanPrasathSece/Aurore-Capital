@@ -27,11 +27,24 @@ export function AuthModal({
 
     try {
       if (isLogin) {
-        await loginFn({ data: { email } });
+        const res = await fetch("http://localhost:5000/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Failed to log in");
+        localStorage.setItem("aurore_user", JSON.stringify(data.user));
       } else {
-        await signupFn({ data: { name, email, phone } });
+        const res = await fetch("http://localhost:5000/api/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, phone })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Failed to sign up");
+        localStorage.setItem("aurore_user", JSON.stringify(data.user));
       }
-      // Save local state for demo purposes
       localStorage.setItem('auth', 'true');
       onClose();
       router.navigate({ to: '/dashboard' });
