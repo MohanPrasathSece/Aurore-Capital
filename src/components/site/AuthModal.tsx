@@ -11,15 +11,18 @@ export function AuthModal({
 }) {
   const [isLogin, setIsLogin] = useState(type === 'login');
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     setIsLogin(type === 'login');
+    setErrorMsg("");
   }, [type]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setErrorMsg("");
     const formData = new FormData(e.currentTarget);
     const email = formData.get('email') as string;
     const name = formData.get('name') as string;
@@ -50,7 +53,7 @@ export function AuthModal({
       router.navigate({ to: '/dashboard' });
     } catch (err: any) {
       console.error(err);
-      alert(err?.message || 'An error occurred. Please try again.');
+      setErrorMsg(err?.message || 'An error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -72,6 +75,12 @@ export function AuthModal({
         <p className="mt-2 text-center text-base text-ink-soft">
           {isLogin ? 'Enter your email to access your dashboard' : 'Join Aurore Capital and start trading'}
         </p>
+
+        {errorMsg && (
+          <div className="mt-6 rounded-xl bg-rose-50 p-4 text-center text-sm font-semibold text-rose-600 border border-rose-100">
+            {errorMsg}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
           {!isLogin && (
