@@ -83,8 +83,11 @@ function Dashboard() {
           phone: formData.get("phone") as string,
           message: formData.get("message") as string,
         })
-      });
       if (!res.ok) throw new Error("Failed");
+      
+      // Simulate processing time
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      
       setSuccess(true);
       (e.target as HTMLFormElement).reset();
       setTimeout(() => setSuccess(false), 3000);
