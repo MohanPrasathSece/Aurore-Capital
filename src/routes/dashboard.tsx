@@ -332,59 +332,59 @@ function Dashboard() {
         </div>
 
         {/* Contact Form */}
-        <div className="mt-12 rounded-3xl border border-primary/10 bg-white p-6 md:p-8 shadow-elevated relative overflow-hidden">
+        <div className="mx-auto max-w-4xl mt-12 rounded-3xl border border-primary/10 bg-white p-8 md:p-12 shadow-elevated relative overflow-hidden">
           <div className="absolute top-0 right-0 -mr-32 -mt-32 h-96 w-96 rounded-full bg-gradient-to-bl from-primary/10 via-primary/5 to-transparent blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 -ml-32 -mb-32 h-96 w-96 rounded-full bg-gradient-to-tr from-accent/30 to-transparent blur-3xl pointer-events-none" />
           
-          <div className="relative mx-auto max-w-xl text-center">
-            <h2 className="text-2xl font-display font-bold text-ink">Need Help?</h2>
-            <p className="mt-2 text-sm text-ink-soft">
+          <div className="relative mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-display font-bold text-ink">Need Help?</h2>
+            <p className="mt-3 text-base text-ink-soft">
               Have questions or need assistance with your portfolio? Send us a message and our support team will get back to you shortly.
             </p>
 
-            <form className="mt-6 space-y-4 text-left" onSubmit={handleSubmit}>
-              <div className="grid gap-4 sm:grid-cols-2">
+            <form className="mt-8 space-y-5 text-left" onSubmit={handleSubmit}>
+              <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1 block text-xs font-semibold text-ink-soft uppercase tracking-wider">Full Name</label>
+                  <label className="mb-1.5 block text-sm font-medium text-ink">Full Name</label>
                   <input 
                     type="text" 
                     name="name"
                     placeholder="Marcus Chen" 
-                    className="w-full rounded-xl border border-primary/20 bg-secondary/40 px-3 py-2.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
+                    className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
                     required
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block text-xs font-semibold text-ink-soft uppercase tracking-wider">Email Address</label>
+                  <label className="mb-1.5 block text-sm font-medium text-ink">Email Address</label>
                   <input 
                     type="email" 
                     name="email"
                     placeholder="hello@example.com" 
-                    className="w-full rounded-xl border border-primary/20 bg-secondary/40 px-3 py-2.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
+                    className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
                     required
                   />
                 </div>
               </div>
               <div>
-                <label className="mb-1 block text-xs font-semibold text-ink-soft uppercase tracking-wider">Phone Number</label>
+                <label className="mb-1.5 block text-sm font-medium text-ink">Phone Number</label>
                 <input 
                   type="tel" 
                   name="phone"
                   placeholder="+1 (555) 000-0000" 
-                  className="w-full rounded-xl border border-primary/20 bg-secondary/40 px-3 py-2.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
+                  className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
                 />
               </div>
               <div>
-                <label className="mb-1 block text-xs font-semibold text-ink-soft uppercase tracking-wider">Message</label>
+                <label className="mb-1.5 block text-sm font-medium text-ink">Message</label>
                 <textarea 
                   name="message"
                   placeholder="How can we help you today?" 
-                  rows={3}
-                  className="w-full rounded-xl border border-primary/20 bg-secondary/40 px-3 py-2.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
+                  rows={4}
+                  className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
                   required
                 />
               </div>
-              <button type="submit" disabled={loading} className="w-full rounded-xl bg-gradient-brand shadow-sm px-4 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-50">
+              <button type="submit" disabled={loading} className="w-full rounded-full bg-gradient-brand shadow-md px-6 py-4 text-base font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50">
                 {loading ? "Sending..." : "Send Message"}
               </button>
             </form>
