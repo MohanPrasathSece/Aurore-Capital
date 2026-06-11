@@ -274,47 +274,60 @@ function Dashboard() {
         </div>
 
         {/* Contact Form */}
-        <div className="mt-12 rounded-3xl border border-black/5 bg-white p-8 md:p-10 shadow-card relative overflow-hidden">
-          <div className="absolute top-0 right-0 -mr-20 -mt-20 h-64 w-64 rounded-full bg-gradient-to-bl from-primary/10 to-transparent blur-3xl pointer-events-none" />
-          <div className="grid gap-8 md:grid-cols-2 items-center relative">
-            <div>
-              <h2 className="text-4xl font-display font-bold text-ink tracking-tight">Upgrade Your Limits</h2>
-              <p className="mt-4 text-lg text-ink-soft max-w-sm leading-relaxed">
-                Ready to deploy larger capital? Speak directly with our institutional trading desk to increase your API limits and get a dedicated account manager.
-              </p>
-            </div>
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <input 
-                  type="text" 
-                  name="name"
-                  placeholder="Full Name" 
-                  className="w-full rounded-xl border border-black/5 bg-black/[0.02] px-4 py-3 text-base text-ink placeholder-ink-soft/60 outline-none transition-all focus:border-primary/40 focus:bg-white focus:ring-4 focus:ring-primary/10" 
-                  required
-                />
-                <input 
-                  type="email" 
-                  name="email"
-                  placeholder="Institutional Email" 
-                  className="w-full rounded-xl border border-black/5 bg-black/[0.02] px-4 py-3 text-base text-ink placeholder-ink-soft/60 outline-none transition-all focus:border-primary/40 focus:bg-white focus:ring-4 focus:ring-primary/10" 
-                  required
-                />
+        <div className="mt-12 rounded-3xl border border-primary/10 bg-white p-8 md:p-12 shadow-elevated relative overflow-hidden">
+          <div className="absolute top-0 right-0 -mr-32 -mt-32 h-96 w-96 rounded-full bg-gradient-to-bl from-primary/10 via-primary/5 to-transparent blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 -ml-32 -mb-32 h-96 w-96 rounded-full bg-gradient-to-tr from-accent/30 to-transparent blur-3xl pointer-events-none" />
+          
+          <div className="relative mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-display font-bold text-ink">Need Help?</h2>
+            <p className="mt-3 text-base text-ink-soft">
+              Have questions or need assistance with your portfolio? Send us a message and our support team will get back to you shortly.
+            </p>
+
+            <form className="mt-8 space-y-5 text-left" onSubmit={handleSubmit}>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-ink">Full Name</label>
+                  <input 
+                    type="text" 
+                    name="name"
+                    placeholder="Marcus Chen" 
+                    className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-ink">Email Address</label>
+                  <input 
+                    type="email" 
+                    name="email"
+                    placeholder="hello@example.com" 
+                    className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-ink">Phone Number</label>
                 <input 
                   type="tel" 
                   name="phone"
-                  placeholder="Phone Number" 
-                  className="w-full rounded-xl border border-black/5 bg-black/[0.02] px-4 py-3 text-base text-ink placeholder-ink-soft/60 outline-none transition-all focus:border-primary/40 focus:bg-white focus:ring-4 focus:ring-primary/10" 
+                  placeholder="+1 (555) 000-0000" 
+                  className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
                 />
               </div>
-              <textarea 
-                name="message"
-                placeholder="Expected Monthly Volume / Additional Information" 
-                rows={3}
-                className="w-full rounded-xl border border-black/5 bg-black/[0.02] px-4 py-3 text-base text-ink placeholder-ink-soft/60 outline-none transition-all focus:border-primary/40 focus:bg-white focus:ring-4 focus:ring-primary/10" 
-                required
-              />
-              <button type="submit" disabled={loading} className="w-full rounded-full bg-gradient-brand shadow-md px-6 py-3.5 text-base font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50">
-                {loading ? "Sending..." : "Contact Desk"}
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-ink">Message</label>
+                <textarea 
+                  name="message"
+                  placeholder="How can we help you today?" 
+                  rows={4}
+                  className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
+                  required
+                />
+              </div>
+              <button type="submit" disabled={loading} className="w-full rounded-full bg-gradient-brand shadow-md px-6 py-4 text-base font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50">
+                {loading ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>
