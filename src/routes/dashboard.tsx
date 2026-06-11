@@ -200,6 +200,64 @@ function Dashboard() {
           </div>
         </div>
 
+        {/* Risk Metrics & Market Intel */}
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          {/* Risk Metrics */}
+          <div className="rounded-3xl border border-primary/10 bg-white p-6 shadow-elevated flex flex-col justify-center">
+            <h2 className="text-xl font-bold text-ink mb-6">Risk Management</h2>
+            <div className="space-y-6">
+              <div>
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-ink-soft font-medium">Portfolio Margin Usage</span>
+                  <span className="text-ink font-bold">14.2%</span>
+                </div>
+                <div className="h-2.5 w-full rounded-full bg-secondary overflow-hidden">
+                  <div className="h-full bg-emerald-400 w-[14.2%] rounded-full" />
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-ink-soft font-medium">Current Drawdown</span>
+                  <span className="text-ink font-bold">1.8%</span>
+                </div>
+                <div className="h-2.5 w-full rounded-full bg-secondary overflow-hidden">
+                  <div className="h-full bg-amber-400 w-[1.8%] rounded-full" />
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-ink-soft font-medium">Auto-Liquidation Risk</span>
+                  <span className="text-emerald-500 font-bold">Low</span>
+                </div>
+                <div className="h-2.5 w-full rounded-full bg-secondary overflow-hidden">
+                  <div className="h-full bg-emerald-400 w-[5%] rounded-full" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Market Intel */}
+          <div className="rounded-3xl border border-primary/10 bg-gradient-to-br from-[#0F172A] to-[#1e1b4b] p-6 shadow-elevated text-white">
+            <h2 className="text-xl font-bold mb-4">AI Market Intel</h2>
+            <div className="space-y-4">
+              <div className="rounded-2xl bg-white/10 p-5 backdrop-blur-md">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-semibold">Bitcoin (BTC)</span>
+                  <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-400/20 text-emerald-300 font-medium">Bullish</span>
+                </div>
+                <p className="text-xs text-white/70 leading-relaxed">Strong institutional accumulation detected. Resistance flip at 64k indicates continuation pattern forming.</p>
+              </div>
+              <div className="rounded-2xl bg-white/10 p-5 backdrop-blur-md">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-semibold">Solana (SOL)</span>
+                  <span className="text-xs px-2.5 py-1 rounded-full bg-rose-400/20 text-rose-300 font-medium">Bearish</span>
+                </div>
+                <p className="text-xs text-white/70 leading-relaxed">On-chain velocity slowing down. Model expects a 5-8% short-term correction before finding support.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Active Positions */}
         <div className="mt-8 rounded-3xl border border-primary/10 bg-white p-6 shadow-elevated">
           <div className="mb-6">
@@ -274,59 +332,59 @@ function Dashboard() {
         </div>
 
         {/* Contact Form */}
-        <div className="mt-12 rounded-3xl border border-primary/10 bg-white p-8 md:p-12 shadow-elevated relative overflow-hidden">
+        <div className="mt-12 rounded-3xl border border-primary/10 bg-white p-6 md:p-8 shadow-elevated relative overflow-hidden">
           <div className="absolute top-0 right-0 -mr-32 -mt-32 h-96 w-96 rounded-full bg-gradient-to-bl from-primary/10 via-primary/5 to-transparent blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 -ml-32 -mb-32 h-96 w-96 rounded-full bg-gradient-to-tr from-accent/30 to-transparent blur-3xl pointer-events-none" />
           
-          <div className="relative mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-display font-bold text-ink">Need Help?</h2>
-            <p className="mt-3 text-base text-ink-soft">
+          <div className="relative mx-auto max-w-xl text-center">
+            <h2 className="text-2xl font-display font-bold text-ink">Need Help?</h2>
+            <p className="mt-2 text-sm text-ink-soft">
               Have questions or need assistance with your portfolio? Send us a message and our support team will get back to you shortly.
             </p>
 
-            <form className="mt-8 space-y-5 text-left" onSubmit={handleSubmit}>
-              <div className="grid gap-5 sm:grid-cols-2">
+            <form className="mt-6 space-y-4 text-left" onSubmit={handleSubmit}>
+              <div className="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-ink">Full Name</label>
+                  <label className="mb-1 block text-xs font-semibold text-ink-soft uppercase tracking-wider">Full Name</label>
                   <input 
                     type="text" 
                     name="name"
                     placeholder="Marcus Chen" 
-                    className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
+                    className="w-full rounded-xl border border-primary/20 bg-secondary/40 px-3 py-2.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
                     required
                   />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-ink">Email Address</label>
+                  <label className="mb-1 block text-xs font-semibold text-ink-soft uppercase tracking-wider">Email Address</label>
                   <input 
                     type="email" 
                     name="email"
                     placeholder="hello@example.com" 
-                    className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
+                    className="w-full rounded-xl border border-primary/20 bg-secondary/40 px-3 py-2.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
                     required
                   />
                 </div>
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-ink">Phone Number</label>
+                <label className="mb-1 block text-xs font-semibold text-ink-soft uppercase tracking-wider">Phone Number</label>
                 <input 
                   type="tel" 
                   name="phone"
                   placeholder="+1 (555) 000-0000" 
-                  className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
+                  className="w-full rounded-xl border border-primary/20 bg-secondary/40 px-3 py-2.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-ink">Message</label>
+                <label className="mb-1 block text-xs font-semibold text-ink-soft uppercase tracking-wider">Message</label>
                 <textarea 
                   name="message"
                   placeholder="How can we help you today?" 
-                  rows={4}
-                  className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
+                  rows={3}
+                  className="w-full rounded-xl border border-primary/20 bg-secondary/40 px-3 py-2.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
                   required
                 />
               </div>
-              <button type="submit" disabled={loading} className="w-full rounded-full bg-gradient-brand shadow-md px-6 py-4 text-base font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50">
+              <button type="submit" disabled={loading} className="w-full rounded-xl bg-gradient-brand shadow-sm px-4 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-50">
                 {loading ? "Sending..." : "Send Message"}
               </button>
             </form>
