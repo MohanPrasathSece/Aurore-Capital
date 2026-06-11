@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowUpRight, TrendingUp, ShieldCheck, Activity, Bitcoin, Sparkles, Zap } from "lucide-react";
+import { CryptoTicker } from "./CryptoTicker";
 
 export function Hero() {
   return (
@@ -8,7 +9,12 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 bg-mesh opacity-80" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[600px] bg-[radial-gradient(60%_60%_at_50%_0%,rgba(124,92,255,0.25),transparent_70%)]" />
 
-      <div className="container-page relative">
+      {/* Crypto Ticker Ribbon */}
+      <div className="absolute top-0 inset-x-0 z-10 pt-[90px]">
+        <CryptoTicker />
+      </div>
+
+      <div className="container-page relative mt-16">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}

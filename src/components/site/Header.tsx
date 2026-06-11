@@ -43,6 +43,9 @@ export function Header() {
           onClick={(e) => {
             if (window.location.pathname === "/") {
               window.scrollTo({ top: 0, behavior: "smooth" });
+            } else if (window.location.pathname === "/dashboard") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
             }
           }}
           className="flex items-center gap-2 pl-3"

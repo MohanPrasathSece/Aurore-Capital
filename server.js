@@ -3,6 +3,10 @@ import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 import xlsx from 'xlsx';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const PORT = 5000;
@@ -100,25 +104,68 @@ app.post('/api/login', (req, res) => {
   res.json({ success: true, user });
 });
 
-app.post('/api/contact', (req, res) => {
+app.post('/api/contact', async (req, res) => {
   const { name, email, phone, message } = req.body;
   saveContact({
     id: Math.random().toString(36).substring(7),
     name, email, phone, message,
     date: new Date().toISOString()
   });
-  // Mock email sent
-  res.json({ success: true });
+
+  try {
+    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+      const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST || 'smtp.gmail.com',
+        port: process.env.SMTP_PORT || 587,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS
+        }
+      });
+      await transporter.sendMail({
+        from: `"${name}" <${process.env.SMTP_USER}>`,
+        to: process.env.CONTACT_EMAIL,
+        subject: 'New Contact Form Submission',
+        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`
+      });
+    }
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Email error:', err);
+    res.status(500).json({ error: 'Failed to send email' });
+  }
 });
 
-app.post('/api/institutional', (req, res) => {
+app.post('/api/institutional', async (req, res) => {
   const { name, email, phone, message } = req.body;
   saveContact({
     id: Math.random().toString(36).substring(7),
     name, email, phone, message,
     date: new Date().toISOString()
   });
-  res.json({ success: true });
+  
+  try {
+    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+      const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST || 'smtp.gmail.com',
+        port: process.env.SMTP_PORT || 587,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS
+        }
+      });
+      await transporter.sendMail({
+        from: `"${name}" <${process.env.SMTP_USER}>`,
+        to: process.env.CONTACT_EMAIL,
+        subject: 'New Institutional Form Submission',
+        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nExpected Volume/Message: ${message}`
+      });
+    }
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Email error:', err);
+    res.status(500).json({ error: 'Failed to send email' });
+  }
 });
 
 app.get('/api/x-secure-admin/data/users', (req, res) => {
