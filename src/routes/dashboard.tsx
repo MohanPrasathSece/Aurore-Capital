@@ -80,7 +80,6 @@ function Dashboard() {
           name: formData.get("name") as string,
           email: formData.get("email") as string,
           phone: formData.get("phone") as string,
-          company: formData.get("company") as string,
           message: formData.get("message") as string,
         })
       });
@@ -304,12 +303,6 @@ function Dashboard() {
                   type="tel" 
                   name="phone"
                   placeholder="Phone Number" 
-                  className="w-full rounded-xl border border-black/5 bg-black/[0.02] px-4 py-3 text-base text-ink placeholder-ink-soft/60 outline-none transition-all focus:border-primary/40 focus:bg-white focus:ring-4 focus:ring-primary/10" 
-                />
-                <input 
-                  type="text" 
-                  name="company"
-                  placeholder="Company Name" 
                   className="w-full rounded-xl border border-black/5 bg-black/[0.02] px-4 py-3 text-base text-ink placeholder-ink-soft/60 outline-none transition-all focus:border-primary/40 focus:bg-white focus:ring-4 focus:ring-primary/10" 
                 />
               </div>

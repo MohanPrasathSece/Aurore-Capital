@@ -30,7 +30,6 @@ function Contact() {
           name: formData.get("name") as string,
           email: formData.get("email") as string,
           phone: formData.get("phone") as string,
-          company: formData.get("company") as string,
           message: formData.get("message") as string,
         })
       });
@@ -78,8 +77,7 @@ function Contact() {
                   <div className="grid gap-5 md:grid-cols-2">
                     <Field name="name" label="Full Name" required />
                     <Field name="email" label="Email" type="email" required />
-                    <Field name="phone" label="Phone" />
-                    <Field name="company" label="Company" />
+                    <Field name="phone" label="Number" />
                   </div>
                   <div className="mt-5">
                     <label className="text-sm font-medium text-ink">Message</label>

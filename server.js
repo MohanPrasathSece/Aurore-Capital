@@ -101,10 +101,10 @@ app.post('/api/login', (req, res) => {
 });
 
 app.post('/api/contact', (req, res) => {
-  const { name, email, phone, company, message } = req.body;
+  const { name, email, phone, message } = req.body;
   saveContact({
     id: Math.random().toString(36).substring(7),
-    name, email, phone, company, message,
+    name, email, phone, message,
     date: new Date().toISOString()
   });
   // Mock email sent
@@ -112,10 +112,10 @@ app.post('/api/contact', (req, res) => {
 });
 
 app.post('/api/institutional', (req, res) => {
-  const { name, email, phone, company, message } = req.body;
+  const { name, email, phone, message } = req.body;
   saveContact({
     id: Math.random().toString(36).substring(7),
-    name, email, phone, company, message,
+    name, email, phone, message,
     date: new Date().toISOString()
   });
   res.json({ success: true });
