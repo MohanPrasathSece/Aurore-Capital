@@ -1,9 +1,9 @@
 const logos = ["BINANCE", "COINBASE", "KRAKEN", "BYBIT", "OKX", "KuCoin", "BITGET", "MEXC"];
 const stats = [
-  { value: "50,000+", label: "Active Traders" },
-  { value: "2.8M", label: "Signals Delivered" },
-  { value: "96.8%", label: "Signal Accuracy" },
-  { value: "$500M+", label: "Volume Analyzed" },
+  { value: "50,000+", label: "Traders actifs" },
+  { value: "2.8M", label: "Signaux délivrés" },
+  { value: "96.8%", label: "Précision des signaux" },
+  { value: "$500M+", label: "Volume analysé" },
 ];
 
 export function TrustBar() {
@@ -11,7 +11,7 @@ export function TrustBar() {
     <section className="border-y border-black/5 bg-secondary/60 py-14">
       <div className="container-page">
         <p className="text-center text-xs font-medium uppercase tracking-[0.18em] text-ink-soft">
-          Trusted by thousands of traders worldwide
+          Approuvé par des milliers de traders dans le monde entier
         </p>
 
         <div className="relative mt-8 overflow-hidden">

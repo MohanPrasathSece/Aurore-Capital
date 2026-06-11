@@ -2,10 +2,10 @@ import { motion, useInView, animate, useMotionValue, useTransform } from "motion
 import { useEffect, useRef } from "react";
 
 const metrics = [
-  { value: 18.4, suffix: "%", label: "Monthly Avg Return" },
-  { value: 96.8, suffix: "%", label: "Win Rate" },
-  { value: 2.4, suffix: "x", label: "Avg Risk/Reward" },
-  { value: 142, suffix: "", label: "Signals This Month" },
+  { value: 18.4, suffix: "%", label: "Rendement moyen mensuel" },
+  { value: 96.8, suffix: "%", label: "Taux de réussite" },
+  { value: 2.4, suffix: "x", label: "Risque/Récompense moyen" },
+  { value: 142, suffix: "", label: "Signaux ce mois-ci" },
 ];
 
 export function Performance() {
@@ -14,14 +14,14 @@ export function Performance() {
       <div className="container-page">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gradient">
-            Live Performance
+            Performance en direct
           </p>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl lg:text-5xl lg:leading-[1.05]">
-            The numbers speak for themselves
+            Les chiffres parlent d'eux-mêmes
           </h2>
           <p className="mt-5 text-lg text-ink-soft">
-            Verified, transparent results — updated in real-time across every
-            strategy we run.
+            Des résultats vérifiés et transparents — mis à jour en temps réel sur toutes
+            nos stratégies.
           </p>
         </div>
 
@@ -43,9 +43,9 @@ export function Performance() {
         </div>
 
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          <PerfChart label="BTC Strategy" change="+24.6%" gradient="from-amber-400 to-orange-500" />
-          <PerfChart label="ETH Strategy" change="+19.2%" gradient="from-indigo-500 to-violet-500" />
-          <PerfChart label="Altcoin Basket" change="+38.4%" gradient="from-fuchsia-500 to-pink-500" />
+          <PerfChart label="Stratégie BTC" change="+24.6%" gradient="from-amber-400 to-orange-500" />
+          <PerfChart label="Stratégie ETH" change="+19.2%" gradient="from-indigo-500 to-violet-500" />
+          <PerfChart label="Panier Altcoins" change="+38.4%" gradient="from-fuchsia-500 to-pink-500" />
         </div>
       </div>
     </section>

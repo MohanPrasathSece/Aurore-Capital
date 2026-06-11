@@ -4,9 +4,9 @@ import { Menu, X } from "lucide-react";
 import logoIcon from "@/components/logoicon.png";
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Features", href: "#features" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "Accueil", href: "/" },
+  { label: "Fonctionnalités", href: "#features" },
+  { label: "Témoignages", href: "#testimonials" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -85,13 +85,13 @@ export function Header() {
                 to="/dashboard"
                 className="rounded-full px-4 py-2 text-base font-medium text-ink-soft transition-colors hover:text-ink hover:bg-primary/10"
               >
-                Dashboard
+                Tableau de bord
               </Link>
               <button
                 onClick={handleLogout}
                 className="group relative inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-base font-semibold text-white transition-transform hover:-translate-y-0.5"
               >
-                Logout
+                Déconnexion
               </button>
             </>
           ) : (
@@ -100,13 +100,13 @@ export function Header() {
                 search={{ auth: "login" }}
                 className="rounded-full px-4 py-2 text-base font-medium text-ink-soft transition-colors hover:text-ink hover:bg-primary/10"
               >
-                Login
+                Connexion
               </Link>
               <Link
                 search={{ auth: "signup" }}
                 className="group relative inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-base font-semibold text-white transition-transform hover:-translate-y-0.5"
               >
-                Sign Up
+                S'inscrire
                 <span className="grid h-5 w-5 place-items-center rounded-full bg-white/15 transition-transform group-hover:translate-x-0.5">
                   →
                 </span>
@@ -155,13 +155,13 @@ export function Header() {
                   onClick={() => setOpen(false)}
                   className="rounded-2xl px-4 py-3 text-lg font-medium text-ink hover:bg-primary/5"
                 >
-                  Dashboard
+                  Tableau de bord
                 </Link>
                 <button
                   onClick={() => { setOpen(false); handleLogout(); }}
                   className="mt-2 rounded-full bg-primary px-4 py-3 text-center text-lg font-semibold text-white"
                 >
-                  Logout
+                  Déconnexion
                 </button>
               </>
             ) : (
@@ -171,14 +171,14 @@ export function Header() {
                   onClick={() => setOpen(false)}
                   className="rounded-2xl px-4 py-3 text-lg font-medium text-ink hover:bg-primary/5"
                 >
-                  Login
+                  Connexion
                 </Link>
                 <Link
                   search={{ auth: "signup" }}
                   onClick={() => setOpen(false)}
                   className="mt-2 rounded-full bg-primary px-4 py-3 text-center text-lg font-semibold text-white"
                 >
-                  Sign Up
+                  S'inscrire
                 </Link>
               </>
             )}

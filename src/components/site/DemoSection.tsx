@@ -23,10 +23,10 @@ export function DemoSection() {
       <div className="container-page relative">
         <div className="mx-auto max-w-3xl text-center mb-16">
           <h2 className="font-display text-4xl font-bold tracking-tight text-ink md:text-5xl">
-            Live AI Engine Demo
+            Démo en direct du moteur IA
           </h2>
           <p className="mt-4 text-lg text-ink-soft">
-            Watch our neural network analyze the market and execute trades in real-time.
+            Regardez notre réseau neuronal analyser le marché et exécuter des transactions en temps réel.
           </p>
         </div>
 
@@ -50,12 +50,12 @@ export function DemoSection() {
                     <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
                     <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
                     <span className="ml-3 text-xs font-medium text-white/60">
-                      Aurore Capital · Live Dashboard
+                      Aurore Capital · Tableau de bord en direct
                     </span>
                   </div>
                   <div className="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium text-white/80">
                     <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-                    AI Engine · Online
+                    Moteur IA · En ligne
                   </div>
                 </div>
 
@@ -81,10 +81,10 @@ export function DemoSection() {
 
                   {/* Stats row */}
                   <div className="col-span-6 md:col-span-3">
-                    <StatCard label="Win Rate" value="96.8%" Icon={TrendingUp} />
+                    <StatCard label="Taux de réussite" value="96.8%" Icon={TrendingUp} />
                   </div>
                   <div className="col-span-6 md:col-span-3">
-                    <StatCard label="Open PnL" value={`+$${pnl.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`} Icon={Activity} accent />
+                    <StatCard label="PnL ouvert" value={`+$${pnl.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`} Icon={Activity} accent />
                   </div>
                   <div className="col-span-12 md:col-span-6">
                     <SentimentCard sentiment={sentiment} />
@@ -102,12 +102,12 @@ export function DemoSection() {
               className="absolute -right-6 top-24 hidden w-64 rounded-2xl border border-white/60 bg-white/80 p-4 shadow-elevated backdrop-blur-xl md:block"
             >
               <div className="flex items-center justify-between text-xs">
-                <span className="font-semibold text-ink">AI Prediction</span>
+                <span className="font-semibold text-ink">Prédiction IA</span>
                 <span className="rounded-full bg-emerald-100 px-2 py-0.5 font-medium text-emerald-700">
                   +6.2%
                 </span>
               </div>
-              <p className="mt-1 text-[11px] text-ink-soft">ETH 24h forecast</p>
+              <p className="mt-1 text-[11px] text-ink-soft">Prévision ETH sur 24h</p>
               <div className="mt-3 h-12 w-full overflow-hidden rounded-lg bg-gradient-to-r from-violet-100 to-fuchsia-100">
                 <svg viewBox="0 0 200 48" className="h-full w-full">
                   <path
@@ -139,8 +139,8 @@ export function DemoSection() {
                   <Zap className="h-4 w-4" />
                 </span>
                 <div>
-                  <p className="text-xs font-semibold text-ink">Trade Executed</p>
-                  <p className="text-[10px] text-ink-soft">SOL/USDT · Auto Bot</p>
+                  <p className="text-xs font-semibold text-ink">Transaction exécutée</p>
+                  <p className="text-[10px] text-ink-soft">SOL/USDT · Bot Auto</p>
                 </div>
               </div>
               <div className="mt-3 flex items-center justify-between text-xs">
@@ -170,7 +170,7 @@ function SignalCard({
           </span>
           <div>
             <p className="text-sm font-semibold text-white">{asset}</p>
-            <p className="text-[11px] text-white/50">AI Signal · live</p>
+            <p className="text-[11px] text-white/50">Signal IA · en direct</p>
           </div>
         </div>
         <span className="rounded-full bg-emerald-400/15 px-2.5 py-1 text-[11px] font-semibold text-emerald-300">
@@ -178,13 +178,13 @@ function SignalCard({
         </span>
       </div>
       <div className="mt-5 grid grid-cols-3 gap-3 text-center">
-        <Cell label="Entry" value={entry} />
+        <Cell label="Entrée" value={entry} />
         <Cell label="TP" value={tp} good />
         <Cell label="SL" value={sl} bad />
       </div>
       <div className="mt-4">
         <div className="flex items-center justify-between text-[11px] text-white/60">
-          <span>AI Confidence</span>
+          <span>Confiance IA</span>
           <span className="font-semibold text-white transition-all duration-300">{confidence}%</span>
         </div>
         <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
@@ -214,13 +214,13 @@ function ChartCard({ portfolio }: { portfolio: number }) {
     <div className="h-full rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition-all duration-300">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs text-white/50">Portfolio Value</p>
+          <p className="text-xs text-white/50">Valeur du portefeuille</p>
           <p className="mt-0.5 text-2xl font-bold text-white transition-all duration-300">
             ${portfolio.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
           </p>
         </div>
         <span className="rounded-full bg-emerald-400/15 px-2.5 py-1 text-xs font-semibold text-emerald-300">
-          +18.42% this month
+          +18,42% ce mois-ci
         </span>
       </div>
       <svg viewBox="0 0 400 140" className="mt-4 h-32 w-full">
@@ -270,9 +270,9 @@ function SentimentCard({ sentiment }: { sentiment: number }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition-all duration-300">
       <div className="flex items-center justify-between">
-        <p className="text-xs font-semibold text-white">Market Sentiment</p>
+        <p className="text-xs font-semibold text-white">Sentiment du marché</p>
         <span className="text-[11px] text-white/50 flex items-center gap-1">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" /> Live
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" /> En direct
         </span>
       </div>
       <div className="mt-3 flex items-center gap-3">
@@ -298,8 +298,8 @@ function SentimentCard({ sentiment }: { sentiment: number }) {
           </span>
         </div>
         <div>
-          <p className="text-sm font-semibold text-emerald-300">Bullish</p>
-          <p className="text-[11px] text-white/50">Strong buying pressure detected across BTC & ETH order books.</p>
+          <p className="text-sm font-semibold text-emerald-300">Haussier</p>
+          <p className="text-[11px] text-white/50">Forte pression d'achat détectée sur les carnets d'ordres BTC et ETH.</p>
         </div>
       </div>
     </div>

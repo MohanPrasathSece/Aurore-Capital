@@ -3,18 +3,18 @@ import { Brain, TrendingDown, Clock } from "lucide-react";
 const items = [
   {
     icon: Brain,
-    title: "Trading Emotionally",
-    desc: "Fear and greed drive 90% of retail losses. AI removes emotion from every decision and executes with precision.",
+    title: "Trading Émotionnel",
+    desc: "La peur et l'avidité entraînent 90 % des pertes des particuliers. L'IA supprime l'émotion de chaque décision et s'exécute avec précision.",
   },
   {
     icon: TrendingDown,
-    title: "Poor Risk Management",
-    desc: "Most traders risk too much per trade. Our framework auto-sizes positions and protects capital first.",
+    title: "Mauvaise Gestion des Risques",
+    desc: "La plupart des traders risquent trop par transaction. Notre cadre redimensionne automatiquement les positions et protège le capital en priorité.",
   },
   {
     icon: Clock,
-    title: "Late Market Entries",
-    desc: "By the time you see the move, it's over. Neural models detect setups seconds before the breakout.",
+    title: "Entrées Tardives sur le Marché",
+    desc: "Au moment où vous voyez le mouvement, c'est terminé. Les modèles neuronaux détectent les configurations des secondes avant la cassure.",
   },
 ];
 
@@ -24,14 +24,14 @@ export function Problem() {
       <div className="container-page">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gradient">
-            The Problem
+            Le Problème
           </p>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl lg:text-5xl lg:leading-[1.05]">
-            Why most traders lose money
+            Pourquoi la plupart des traders perdent de l'argent
           </h2>
           <p className="mt-5 text-lg text-ink-soft">
-            The market punishes hesitation and rewards discipline. Aurore Capital brings
-            both, at the speed of machines.
+            Le marché punit l'hésitation et récompense la discipline. Aurore Capital apporte
+            les deux, à la vitesse des machines.
           </p>
         </div>
 

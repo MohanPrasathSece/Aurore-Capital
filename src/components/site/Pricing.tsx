@@ -2,16 +2,16 @@ import { Check } from "lucide-react";
 
 const plans = [
   {
-    name: "Starter", price: "49", desc: "Perfect for new traders getting started.",
-    features: ["BTC & ETH signals", "Telegram delivery", "Basic risk metrics", "Email support"],
+    name: "Starter", price: "49", desc: "Parfait pour les nouveaux traders qui se lancent.",
+    features: ["Signaux BTC et ETH", "Livraison sur Telegram", "Métriques de risque de base", "Support par e-mail"],
   },
   {
-    name: "Professional", price: "149", desc: "For serious traders who want every edge.", highlight: true,
-    features: ["All Starter features", "Altcoin signals", "AI Trading Bot access", "Multi-exchange execution", "Advanced analytics", "Priority support"],
+    name: "Professional", price: "149", desc: "Pour les traders sérieux qui veulent tous les avantages.", highlight: true,
+    features: ["Toutes les fonctionnalités Starter", "Signaux Altcoins", "Accès au bot de trading IA", "Exécution multi-échanges", "Analytique avancée", "Support prioritaire"],
   },
   {
-    name: "Enterprise", price: "Custom", desc: "For funds, family offices and institutions.",
-    features: ["Custom strategies", "Dedicated infrastructure", "API access", "White-glove onboarding", "24/7 phone support"],
+    name: "Enterprise", price: "Sur mesure", desc: "Pour les fonds, family offices et institutions.",
+    features: ["Stratégies personnalisées", "Infrastructure dédiée", "Accès API", "Intégration premium", "Support téléphonique 24/7"],
   },
 ];
 
@@ -21,13 +21,13 @@ export function Pricing() {
       <div className="container-page">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gradient">
-            Pricing
+            Tarifs
           </p>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl lg:text-5xl lg:leading-[1.05]">
-            Simple, transparent pricing
+            Des tarifs simples et transparents
           </h2>
           <p className="mt-5 text-lg text-ink-soft">
-            Cancel anytime. 30-day money-back guarantee on all plans.
+            Annulez à tout moment. Garantie de remboursement de 30 jours sur tous les forfaits.
           </p>
         </div>
 
@@ -43,7 +43,7 @@ export function Pricing() {
             >
               {p.highlight && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-white shadow-md">
-                  Most popular
+                  Le plus populaire
                 </span>
               )}
               <p className={`text-sm font-semibold ${p.highlight ? "text-primary-glow" : "text-ink-soft"}`}>
@@ -51,10 +51,10 @@ export function Pricing() {
               </p>
               <div className="mt-3 flex items-baseline gap-1">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {p.price === "Custom" ? "Custom" : `$${p.price}`}
+                  {p.price === "Sur mesure" ? "Sur mesure" : `$${p.price}`}
                 </span>
-                {p.price !== "Custom" && (
-                  <span className={p.highlight ? "text-white/60" : "text-ink-soft"}>/month</span>
+                {p.price !== "Sur mesure" && (
+                  <span className={p.highlight ? "text-white/60" : "text-ink-soft"}>/mois</span>
                 )}
               </div>
               <p className={`mt-3 text-sm ${p.highlight ? "text-white/70" : "text-ink-soft"}`}>
@@ -79,7 +79,7 @@ export function Pricing() {
                     : "bg-ink text-white"
                 }`}
               >
-                {p.name === "Enterprise" ? "Contact sales" : "Get started"}
+                {p.name === "Enterprise" ? "Contacter les ventes" : "Commencer"}
               </button>
             </div>
           ))}

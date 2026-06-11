@@ -8,8 +8,8 @@ import { ArrowUpRight, ArrowDownRight, Activity, DollarSign, Percent, Zap } from
 export const Route = createFileRoute('/dashboard')({
   head: () => ({
     meta: [
-      { title: 'Dashboard — Aurore Capital AI' },
-      { name: 'description', content: 'Demo trading dashboard.' },
+      { title: 'Tableau de bord — Aurore Capital AI' },
+      { name: 'description', content: 'Tableau de bord de trading démo.' },
     ],
   }),
   component: Dashboard,
@@ -49,7 +49,7 @@ function StatCard({ title, value, change, icon: Icon }: any) {
         </div>
       </div>
       <p className="text-xs font-semibold text-emerald-600 mt-4 flex items-center gap-1">
-        <ArrowUpRight className="h-3 w-3" /> {change} from last period
+        <ArrowUpRight className="h-3 w-3" /> {change} depuis la dernière période
       </p>
     </div>
   );
@@ -84,11 +84,11 @@ function Dashboard() {
         })
       });
       if (!res.ok) throw new Error("Failed");
-      alert("Message sent to institutional desk!");
+      alert("Message envoyé au bureau institutionnel !");
       (e.target as HTMLFormElement).reset();
     } catch (err) {
       console.error(err);
-      alert("Error sending message.");
+      alert("Erreur lors de l'envoi du message.");
     } finally {
       setLoading(false);
     }
@@ -102,8 +102,8 @@ function Dashboard() {
       <div className="pt-28 pb-20 container-page max-w-7xl">
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-display font-bold text-ink">Trading Dashboard</h1>
-            <p className="text-ink-soft mt-1">Welcome back. Here is your automated portfolio overview.</p>
+            <h1 className="text-3xl font-display font-bold text-ink">Tableau de bord de trading</h1>
+            <p className="text-ink-soft mt-1">Bon retour. Voici l'aperçu de votre portefeuille automatisé.</p>
           </div>
           <div className="flex gap-4">
             <div className="rounded-2xl border border-primary/10 bg-white px-5 py-3 shadow-sm flex items-center gap-3">
@@ -111,13 +111,13 @@ function Dashboard() {
                 <Activity className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-xs font-semibold text-ink-soft uppercase tracking-wider">Status</p>
+                <p className="text-xs font-semibold text-ink-soft uppercase tracking-wider">Statut</p>
                 <p className="text-sm font-bold text-emerald-600 flex items-center gap-1">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
-                  Bot Active
+                  Bot actif
                 </p>
               </div>
             </div>
@@ -126,17 +126,17 @@ function Dashboard() {
 
         {/* Stats Row */}
         <div className="grid gap-6 md:grid-cols-3 mb-8">
-          <StatCard title="Total Balance" value="$15,200.00" change="+12.4%" icon={DollarSign} />
-          <StatCard title="Today's Profit" value="+$450.00" change="+3.2%" icon={Percent} />
-          <StatCard title="Win Rate" value="84.2%" change="+1.5%" icon={Zap} />
+          <StatCard title="Solde total" value="$15,200.00" change="+12.4%" icon={DollarSign} />
+          <StatCard title="Profit du jour" value="+$450.00" change="+3.2%" icon={Percent} />
+          <StatCard title="Taux de réussite" value="84.2%" change="+1.5%" icon={Zap} />
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[2fr_1fr]">
           {/* Main Chart area */}
           <div className="rounded-3xl border border-primary/10 bg-white p-6 shadow-elevated">
             <div className="mb-6">
-              <h2 className="text-xl font-bold text-ink">Portfolio Growth</h2>
-              <p className="text-sm text-ink-soft">Performance over the last 24 hours</p>
+              <h2 className="text-xl font-bold text-ink">Croissance du portefeuille</h2>
+              <p className="text-sm text-ink-soft">Performance sur les dernières 24 heures</p>
             </div>
             <div className="h-[300px] w-full">
               <ResponsiveContainer width="100%" height="100%">
@@ -164,8 +164,8 @@ function Dashboard() {
           <div className="rounded-3xl border border-primary/10 bg-white p-6 shadow-elevated flex flex-col">
             <div className="mb-6 flex justify-between items-center">
               <div>
-                <h2 className="text-xl font-bold text-ink">Live Signals</h2>
-                <p className="text-sm text-ink-soft">AI executed trades</p>
+                <h2 className="text-xl font-bold text-ink">Signaux en direct</h2>
+                <p className="text-sm text-ink-soft">Transactions exécutées par l'IA</p>
               </div>
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/40 opacity-75"></span>
@@ -186,11 +186,11 @@ function Dashboard() {
                   </div>
                   <div className="flex justify-between items-end mt-3">
                     <div>
-                      <p className="text-xs text-ink-soft">Entry</p>
+                      <p className="text-xs text-ink-soft">Entrée</p>
                       <p className="font-medium text-ink">{signal.price}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-xs text-ink-soft">Confidence</p>
+                      <p className="text-xs text-ink-soft">Confiance</p>
                       <p className="font-semibold text-primary">{signal.confidence}</p>
                     </div>
                   </div>
@@ -204,11 +204,11 @@ function Dashboard() {
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {/* Risk Metrics */}
           <div className="rounded-3xl border border-primary/10 bg-white p-6 shadow-elevated flex flex-col justify-center">
-            <h2 className="text-xl font-bold text-ink mb-6">Risk Management</h2>
+            <h2 className="text-xl font-bold text-ink mb-6">Gestion des risques</h2>
             <div className="space-y-6">
               <div>
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-ink-soft font-medium">Portfolio Margin Usage</span>
+                  <span className="text-ink-soft font-medium">Utilisation de la marge du portefeuille</span>
                   <span className="text-ink font-bold">14.2%</span>
                 </div>
                 <div className="h-2.5 w-full rounded-full bg-secondary overflow-hidden">
@@ -217,7 +217,7 @@ function Dashboard() {
               </div>
               <div>
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-ink-soft font-medium">Current Drawdown</span>
+                  <span className="text-ink-soft font-medium">Drawdown actuel</span>
                   <span className="text-ink font-bold">1.8%</span>
                 </div>
                 <div className="h-2.5 w-full rounded-full bg-secondary overflow-hidden">
@@ -226,8 +226,8 @@ function Dashboard() {
               </div>
               <div>
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-ink-soft font-medium">Auto-Liquidation Risk</span>
-                  <span className="text-emerald-500 font-bold">Low</span>
+                  <span className="text-ink-soft font-medium">Risque de liquidation automatique</span>
+                  <span className="text-emerald-500 font-bold">Faible</span>
                 </div>
                 <div className="h-2.5 w-full rounded-full bg-secondary overflow-hidden">
                   <div className="h-full bg-emerald-400 w-[5%] rounded-full" />
@@ -238,21 +238,21 @@ function Dashboard() {
 
           {/* Market Intel */}
           <div className="rounded-3xl border border-primary/10 bg-gradient-to-br from-[#0F172A] to-[#1e1b4b] p-6 shadow-elevated text-white">
-            <h2 className="text-xl font-bold mb-4">AI Market Intel</h2>
+            <h2 className="text-xl font-bold mb-4">Intelligence de marché par l'IA</h2>
             <div className="space-y-4">
               <div className="rounded-2xl bg-white/10 p-5 backdrop-blur-md">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-semibold">Bitcoin (BTC)</span>
-                  <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-400/20 text-emerald-300 font-medium">Bullish</span>
+                  <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-400/20 text-emerald-300 font-medium">Haussier</span>
                 </div>
-                <p className="text-xs text-white/70 leading-relaxed">Strong institutional accumulation detected. Resistance flip at 64k indicates continuation pattern forming.</p>
+                <p className="text-xs text-white/70 leading-relaxed">Forte accumulation institutionnelle détectée. Le retournement de résistance à 64k indique la formation d'un modèle de continuation.</p>
               </div>
               <div className="rounded-2xl bg-white/10 p-5 backdrop-blur-md">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-semibold">Solana (SOL)</span>
-                  <span className="text-xs px-2.5 py-1 rounded-full bg-rose-400/20 text-rose-300 font-medium">Bearish</span>
+                  <span className="text-xs px-2.5 py-1 rounded-full bg-rose-400/20 text-rose-300 font-medium">Baissier</span>
                 </div>
-                <p className="text-xs text-white/70 leading-relaxed">On-chain velocity slowing down. Model expects a 5-8% short-term correction before finding support.</p>
+                <p className="text-xs text-white/70 leading-relaxed">Ralentissement de la vélocité on-chain. Le modèle prévoit une correction à court terme de 5 à 8 % avant de trouver un support.</p>
               </div>
             </div>
           </div>
@@ -261,17 +261,17 @@ function Dashboard() {
         {/* Active Positions */}
         <div className="mt-8 rounded-3xl border border-primary/10 bg-white p-6 shadow-elevated">
           <div className="mb-6">
-            <h2 className="text-xl font-bold text-ink">Active Positions</h2>
+            <h2 className="text-xl font-bold text-ink">Positions actives</h2>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-black/5 text-ink-soft">
-                  <th className="pb-3 font-medium">Asset</th>
-                  <th className="pb-3 font-medium">Size</th>
-                  <th className="pb-3 font-medium">Entry Price</th>
-                  <th className="pb-3 font-medium">Current Price</th>
-                  <th className="pb-3 font-medium text-right">Profit/Loss</th>
+                  <th className="pb-3 font-medium">Actif</th>
+                  <th className="pb-3 font-medium">Taille</th>
+                  <th className="pb-3 font-medium">Prix d'entrée</th>
+                  <th className="pb-3 font-medium">Prix actuel</th>
+                  <th className="pb-3 font-medium text-right">Profit/Perte</th>
                 </tr>
               </thead>
               <tbody>
@@ -301,32 +301,32 @@ function Dashboard() {
             </table>
           </div>
         </div>
-        {/* How Aurore AI Works */}
+        {/* Comment fonctionne Aurore IA */}
         <div className="mt-12">
           <div className="mb-6">
-            <h2 className="text-3xl font-bold text-ink">How Aurore AI Works</h2>
-            <p className="text-base text-ink-soft">The architecture behind your automated trades.</p>
+            <h2 className="text-3xl font-bold text-ink">Comment fonctionne Aurore IA</h2>
+            <p className="text-base text-ink-soft">L'architecture derrière vos transactions automatisées.</p>
           </div>
           <div className="grid gap-6 md:grid-cols-4">
             <div className="rounded-3xl border border-primary/10 bg-white p-6 shadow-card">
               <div className="mb-4 grid h-10 w-10 place-items-center rounded-full bg-primary/10 text-primary font-bold">1</div>
-              <h3 className="font-semibold text-ink text-lg">Data Ingestion</h3>
-              <p className="mt-2 text-base text-ink-soft">Processes 5TB+ of order book and on-chain data daily.</p>
+              <h3 className="font-semibold text-ink text-lg">Ingestion de données</h3>
+              <p className="mt-2 text-base text-ink-soft">Traite plus de 5 To de données de carnet d'ordres et on-chain quotidiennement.</p>
             </div>
             <div className="rounded-3xl border border-primary/10 bg-white p-6 shadow-card">
               <div className="mb-4 grid h-10 w-10 place-items-center rounded-full bg-primary/10 text-primary font-bold">2</div>
-              <h3 className="font-semibold text-ink text-lg">Neural Analysis</h3>
-              <p className="mt-2 text-base text-ink-soft">Transformer models predict short-term price action and momentum.</p>
+              <h3 className="font-semibold text-ink text-lg">Analyse neuronale</h3>
+              <p className="mt-2 text-base text-ink-soft">Les modèles Transformer prédisent l'action des prix et le momentum à court terme.</p>
             </div>
             <div className="rounded-3xl border border-primary/10 bg-white p-6 shadow-card">
               <div className="mb-4 grid h-10 w-10 place-items-center rounded-full bg-primary/10 text-primary font-bold">3</div>
-              <h3 className="font-semibold text-ink text-lg">Execution</h3>
-              <p className="mt-2 text-base text-ink-soft">Sub-millisecond API execution across major liquidity providers.</p>
+              <h3 className="font-semibold text-ink text-lg">Exécution</h3>
+              <p className="mt-2 text-base text-ink-soft">Exécution d'API en moins d'une milliseconde auprès des principaux fournisseurs de liquidité.</p>
             </div>
             <div className="rounded-3xl border border-primary/10 bg-white p-6 shadow-card">
               <div className="mb-4 grid h-10 w-10 place-items-center rounded-full bg-primary/10 text-primary font-bold">4</div>
-              <h3 className="font-semibold text-ink text-lg">Risk Management</h3>
-              <p className="mt-2 text-base text-ink-soft">Dynamic stop-losses and position sizing protect capital.</p>
+              <h3 className="font-semibold text-ink text-lg">Gestion des risques</h3>
+              <p className="mt-2 text-base text-ink-soft">Les stop-loss dynamiques et la taille des positions protègent le capital.</p>
             </div>
           </div>
         </div>
@@ -337,15 +337,15 @@ function Dashboard() {
           <div className="absolute bottom-0 left-0 -ml-32 -mb-32 h-96 w-96 rounded-full bg-gradient-to-tr from-accent/30 to-transparent blur-3xl pointer-events-none" />
           
           <div className="relative mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-display font-bold text-ink">Need Help?</h2>
+            <h2 className="text-3xl font-display font-bold text-ink">Besoin d'aide ?</h2>
             <p className="mt-3 text-base text-ink-soft">
-              Have questions or need assistance with your portfolio? Send us a message and our support team will get back to you shortly.
+              Vous avez des questions ou besoin d'aide pour votre portefeuille ? Envoyez-nous un message et notre équipe d'assistance vous répondra sous peu.
             </p>
 
             <form className="mt-8 space-y-5 text-left" onSubmit={handleSubmit}>
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-ink">Full Name</label>
+                  <label className="mb-1.5 block text-sm font-medium text-ink">Nom complet</label>
                   <input 
                     type="text" 
                     name="name"
@@ -355,7 +355,7 @@ function Dashboard() {
                   />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-ink">Email Address</label>
+                  <label className="mb-1.5 block text-sm font-medium text-ink">Adresse e-mail</label>
                   <input 
                     type="email" 
                     name="email"
@@ -366,7 +366,7 @@ function Dashboard() {
                 </div>
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-ink">Phone Number</label>
+                <label className="mb-1.5 block text-sm font-medium text-ink">Numéro de téléphone</label>
                 <input 
                   type="tel" 
                   name="phone"
@@ -378,14 +378,14 @@ function Dashboard() {
                 <label className="mb-1.5 block text-sm font-medium text-ink">Message</label>
                 <textarea 
                   name="message"
-                  placeholder="How can we help you today?" 
+                  placeholder="Comment pouvons-nous vous aider aujourd'hui ?" 
                   rows={4}
                   className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
                   required
                 />
               </div>
               <button type="submit" disabled={loading} className="w-full rounded-full bg-gradient-brand shadow-md px-6 py-4 text-base font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50">
-                {loading ? "Sending..." : "Send Message"}
+                {loading ? "Envoi en cours..." : "Envoyer le message"}
               </button>
             </form>
           </div>

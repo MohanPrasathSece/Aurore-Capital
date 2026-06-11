@@ -8,7 +8,7 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — Aurore Capital AI" },
-      { name: "description", content: "Get in touch with the Aurore Capital AI team. Talk to sales, support or partnerships." },
+      { name: "description", content: "Entrez en contact avec l'équipe Aurore Capital AI. Parlez aux ventes, au support ou aux partenariats." },
     ],
   }),
   component: Contact,
@@ -38,7 +38,7 @@ function Contact() {
       (e.target as HTMLFormElement).reset();
     } catch (err) {
       console.error(err);
-      alert("Error sending message. Please try again.");
+      alert("Erreur lors de l'envoi du message. Veuillez réessayer.");
     } finally {
       setLoading(false);
     }
@@ -53,38 +53,38 @@ function Contact() {
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gradient">Contact</p>
             <h1 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-[80px] lg:leading-[1.02]">
-              Let's talk <span className="text-gradient">trading.</span>
+              Parlons <span className="text-gradient">trading.</span>
             </h1>
           </div>
           <div className="mx-auto mt-16 grid max-w-6xl gap-8 lg:grid-cols-[1fr_1.2fr]">
             <div className="space-y-5">
               <div className="rounded-3xl border border-primary/10 bg-white p-8 shadow-card">
-                <h2 className="text-xl font-semibold text-ink">Aurore Capital AI HQ</h2>
+                <h2 className="text-xl font-semibold text-ink">Siège social d'Aurore Capital AI</h2>
                 <ul className="mt-7 space-y-5">
-                  <Info Icon={MapPin} label="Address" value="One Financial Plaza, New York" />
-                  <Info Icon={Mail} label="Email" value="hello@aurorecapital.com" href="mailto:hello@aurorecapital.com" />
+                  <Info Icon={MapPin} label="Adresse" value="One Financial Plaza, New York" />
+                  <Info Icon={Mail} label="E-mail" value="hello@aurorecapital.com" href="mailto:hello@aurorecapital.com" />
                 </ul>
               </div>
             </div>
             <form onSubmit={handleSubmit} className="rounded-3xl border border-primary/10 bg-white p-6 sm:p-8 shadow-elevated md:p-10">
               {success ? (
                 <div className="text-center py-12">
-                  <h3 className="text-2xl font-bold text-ink">Message Sent!</h3>
-                  <p className="mt-2 text-ink-soft">We'll get back to you shortly.</p>
+                  <h3 className="text-2xl font-bold text-ink">Message envoyé !</h3>
+                  <p className="mt-2 text-ink-soft">Nous vous répondrons sous peu.</p>
                 </div>
               ) : (
                 <>
                   <div className="grid gap-5 md:grid-cols-2">
-                    <Field name="name" label="Full Name" required />
-                    <Field name="email" label="Email" type="email" required />
-                    <Field name="phone" label="Number" />
+                    <Field name="name" label="Nom complet" required />
+                    <Field name="email" label="E-mail" type="email" required />
+                    <Field name="phone" label="Numéro" />
                   </div>
                   <div className="mt-5">
                     <label className="text-sm font-medium text-ink">Message</label>
                     <textarea name="message" required rows={5} className="mt-2 w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" />
                   </div>
                   <button type="submit" disabled={loading} className="group mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-7 py-4 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 disabled:opacity-50">
-                    {loading ? "Sending..." : "Send message"}
+                    {loading ? "Envoi en cours..." : "Envoyer le message"}
                   </button>
                 </>
               )}

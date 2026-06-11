@@ -1,11 +1,11 @@
 import { Radar, Target, ShieldCheck, Rocket, TrendingUp } from "lucide-react";
 
 const steps = [
-  { n: "01", title: "AI Scans Market", desc: "Neural models process 400+ pairs across 12 exchanges in real-time.", icon: Radar },
-  { n: "02", title: "Detects Opportunity", desc: "Pattern recognition flags high-probability setups within milliseconds.", icon: Target },
-  { n: "03", title: "Risk Assessment", desc: "Volatility, liquidity and correlation are scored before every trade.", icon: ShieldCheck },
-  { n: "04", title: "Automated Execution", desc: "Orders route directly to your exchange with optimal slippage control.", icon: Rocket },
-  { n: "05", title: "Profit Optimization", desc: "Adaptive trailing stops and partial take-profits maximize every edge.", icon: TrendingUp },
+  { n: "01", title: "L'IA Scanne le Marché", desc: "Les modèles neuronaux traitent plus de 400 paires sur 12 échanges en temps réel.", icon: Radar },
+  { n: "02", title: "Détecte les Opportunités", desc: "La reconnaissance de formes signale les configurations à haute probabilité en quelques millisecondes.", icon: Target },
+  { n: "03", title: "Évaluation des Risques", desc: "La volatilité, la liquidité et la corrélation sont évaluées avant chaque transaction.", icon: ShieldCheck },
+  { n: "04", title: "Exécution Automatisée", desc: "Les ordres sont acheminés directement vers votre échange avec un contrôle optimal du glissement.", icon: Rocket },
+  { n: "05", title: "Optimisation des Profits", desc: "Les trailing stops adaptatifs et les prises de bénéfices partielles maximisent chaque avantage.", icon: TrendingUp },
 ];
 
 export function BotWorkflow() {
@@ -15,16 +15,16 @@ export function BotWorkflow() {
       <div className="container-page relative">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary-glow">
-            AI Trading Bot
+            Bot de Trading IA
           </p>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl lg:leading-[1.05]">
-            Autonomous trading,
+            Trading autonome,
             <br />
-            <span className="text-gradient">engineered to win.</span>
+            <span className="text-gradient">conçu pour gagner.</span>
           </h2>
           <p className="mt-5 text-lg text-white/60">
-            Five layers of intelligence working in perfect sync — 24 hours a day,
-            across every market condition.
+            Cinq couches d'intelligence fonctionnant en parfaite synchronisation — 24 heures sur 24,
+            dans toutes les conditions de marché.
           </p>
         </div>
 
@@ -34,7 +34,7 @@ export function BotWorkflow() {
               <div className="group relative h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/[0.07]">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-semibold tracking-wider text-white/40">
-                    STEP {s.n}
+                    ÉTAPE {s.n}
                   </span>
                   <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-brand text-white shadow-[0_8px_30px_-8px_rgba(124,92,255,0.7)]">
                     <s.icon className="h-5 w-5" />

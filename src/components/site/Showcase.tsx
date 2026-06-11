@@ -2,22 +2,22 @@ import { Check } from "lucide-react";
 
 const rows = [
   {
-    eyebrow: "Signal Dashboard",
-    title: "Every signal, perfectly framed.",
-    desc: "Real-time entries, confidence scores and full trade history — all rendered in one focused interface.",
-    points: ["Live confidence scoring", "One-click execution", "Historical analytics"],
+    eyebrow: "Tableau de bord des signaux",
+    title: "Chaque signal, parfaitement encadré.",
+    desc: "Entrées en temps réel, scores de confiance et historique complet des transactions — le tout dans une interface concentrée.",
+    points: ["Score de confiance en direct", "Exécution en un clic", "Analyses historiques"],
   },
   {
-    eyebrow: "Trading Bot Console",
-    title: "Hands-off, fully accountable.",
-    desc: "Configure strategies once. The bot executes, hedges and reports — you stay in control with full transparency.",
-    points: ["Strategy presets", "Drawdown limits", "Real-time logs"],
+    eyebrow: "Console du bot de trading",
+    title: "Autonome, totalement responsable.",
+    desc: "Configurez les stratégies une fois. Le bot exécute, couvre et rapporte — vous gardez le contrôle en toute transparence.",
+    points: ["Préréglages de stratégie", "Limites de drawdown", "Journaux en temps réel"],
   },
   {
-    eyebrow: "Risk Manager",
-    title: "Capital protection, automated.",
-    desc: "Position sizing, exposure limits and correlation-aware hedging keep your portfolio resilient in every regime.",
-    points: ["Auto stop-loss", "Exposure caps", "Correlation hedging"],
+    eyebrow: "Gestionnaire de risques",
+    title: "Protection du capital, automatisée.",
+    desc: "Taille des positions, limites d'exposition et couverture sensible aux corrélations maintiennent votre portefeuille résilient dans tous les régimes.",
+    points: ["Stop-loss automatique", "Plafonds d'exposition", "Couverture de corrélation"],
   },
 ];
 
@@ -73,7 +73,7 @@ function MockPanel({ index }: { index: number }) {
         <div className="mt-6 grid gap-3">
           <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-white/60">{["Active Signals", "Bot Strategies", "Total Exposure"][index]}</span>
+              <span className="text-xs text-white/60">{["Signaux actifs", "Stratégies du bot", "Exposition totale"][index]}</span>
               <span className="text-xs text-emerald-300">+12.4%</span>
             </div>
             <p className="mt-2 text-2xl font-bold text-white">
@@ -85,7 +85,7 @@ function MockPanel({ index }: { index: number }) {
               <div key={k} className="rounded-xl border border-white/10 bg-white/[0.04] p-3">
                 <div className="h-1 w-12 rounded-full bg-gradient-brand" />
                 <p className="mt-2 text-[10px] text-white/40">Module {k + 1}</p>
-                <p className="text-sm font-semibold text-white">Operational</p>
+                <p className="text-sm font-semibold text-white">Opérationnel</p>
               </div>
             ))}
           </div>

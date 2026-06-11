@@ -1,12 +1,12 @@
 import { Clock, Bell, Send, MessageCircle, Network, Wallet } from "lucide-react";
 
 const features = [
-  { icon: Clock, title: "24/7 Market Monitoring", desc: "Our engine never sleeps. Every candle, every order book, every block." },
-  { icon: Bell, title: "Real-Time Alerts", desc: "Receive trade-ready signals the moment a setup confirms." },
-  { icon: Send, title: "Telegram Integration", desc: "Get signals delivered directly to your private Telegram channel." },
-  { icon: MessageCircle, title: "Discord Integration", desc: "Built-in Discord bot keeps your community in sync with the AI." },
-  { icon: Network, title: "Multi Exchange Support", desc: "Binance, Coinbase, Bybit, OKX, Kraken and more — all in one place." },
-  { icon: Wallet, title: "Portfolio Tracking", desc: "Unified view of every position, PnL and exposure across wallets." },
+  { icon: Clock, title: "Surveillance du marché 24/7", desc: "Notre moteur ne dort jamais. Chaque bougie, chaque carnet d'ordres, chaque bloc." },
+  { icon: Bell, title: "Alertes en temps réel", desc: "Recevez des signaux prêts à trader dès qu'une configuration se confirme." },
+  { icon: Send, title: "Intégration Telegram", desc: "Recevez les signaux directement sur votre canal Telegram privé." },
+  { icon: MessageCircle, title: "Intégration Discord", desc: "Le bot Discord intégré garde votre communauté synchronisée avec l'IA." },
+  { icon: Network, title: "Support multi-échanges", desc: "Binance, Coinbase, Bybit, OKX, Kraken et plus — tout au même endroit." },
+  { icon: Wallet, title: "Suivi de portefeuille", desc: "Vue unifiée de chaque position, PnL et exposition sur tous les portefeuilles." },
 ];
 
 export function Features() {
@@ -15,10 +15,10 @@ export function Features() {
       <div className="container-page">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gradient">
-            Features
+            Fonctionnalités
           </p>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl lg:text-5xl lg:leading-[1.05]">
-            Everything you need to trade like a fund
+            Tout ce dont vous avez besoin pour trader comme un fonds
           </h2>
         </div>
 

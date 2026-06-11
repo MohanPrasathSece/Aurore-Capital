@@ -17,27 +17,27 @@ function ExportData() {
       a.click();
     } catch (err) {
       console.error(err);
-      alert(`Failed to download ${type} data`);
+      alert(`Échec du téléchargement des données ${type}`);
     }
   };
 
   return (
     <div className="min-h-screen grid place-items-center bg-background text-foreground">
       <div className="text-center max-w-2xl px-6">
-        <h1 className="text-3xl font-display font-bold text-ink">Admin Dashboard</h1>
-        <p className="mt-4 text-ink-soft">Download the latest database securely.</p>
+        <h1 className="text-3xl font-display font-bold text-ink">Tableau de bord d'administration</h1>
+        <p className="mt-4 text-ink-soft">Téléchargez la dernière base de données en toute sécurité.</p>
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button
             onClick={() => handleDownload('users')}
             className="w-full sm:w-auto rounded-full bg-gradient-brand px-8 py-3.5 font-semibold text-white transition-opacity hover:opacity-90 shadow-md"
           >
-            Download Users (.xlsx)
+            Télécharger les utilisateurs (.xlsx)
           </button>
           <button
             onClick={() => handleDownload('contacts')}
             className="w-full sm:w-auto rounded-full bg-ink px-8 py-3.5 font-semibold text-white transition-opacity hover:opacity-90 shadow-md"
           >
-            Download Contacts (.xlsx)
+            Télécharger les contacts (.xlsx)
           </button>
         </div>
       </div>

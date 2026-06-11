@@ -2,20 +2,20 @@ import { Quote } from "lucide-react";
 
 const items = [
   {
-    name: "Marcus Chen", role: "Crypto Trader · Singapore", profit: "+184% YTD",
-    quote: "Aurore Capital replaced my entire signal stack. The accuracy and execution speed are unlike anything I've used in 8 years of trading.",
+    name: "Marcus Chen", role: "Crypto Trader · Singapour", profit: "+184% YTD",
+    quote: "Aurore Capital a remplacé toute ma pile de signaux. La précision et la vitesse d'exécution ne ressemblent à rien de ce que j'ai utilisé en 8 ans de trading.",
   },
   {
-    name: "Sophia Reyes", role: "Portfolio Manager · NYC", profit: "+62% in 90 days",
-    quote: "I run a family-office crypto book. The risk framework alone is worth the subscription — it caught two flash crashes before I did.",
+    name: "Sophia Reyes", role: "Gestionnaire de portefeuille · NYC", profit: "+62% en 90 jours",
+    quote: "Je gère un portefeuille crypto de family office. Le cadre de gestion des risques à lui seul vaut l'abonnement — il a détecté deux krachs éclair avant moi.",
   },
   {
-    name: "Daniel Okafor", role: "Independent Trader · London", profit: "+241% in 6 months",
-    quote: "I went from blowing accounts to consistent monthly returns. The bot handles everything while I focus on macro research.",
+    name: "Daniel Okafor", role: "Trader indépendant · Londres", profit: "+241% en 6 mois",
+    quote: "Je suis passé de comptes réduits à néant à des rendements mensuels constants. Le bot s'occupe de tout pendant que je me concentre sur la recherche macro.",
   },
   {
-    name: "Lena Hoffmann", role: "Quant Analyst · Berlin", profit: "+98% YTD",
-    quote: "The neural model has a measurable edge on BTC and ETH. The transparency of the analytics dashboard is institutional grade.",
+    name: "Lena Hoffmann", role: "Analyste quantitatif · Berlin", profit: "+98% YTD",
+    quote: "Le modèle neuronal a un avantage mesurable sur BTC et ETH. La transparence du tableau de bord analytique est de niveau institutionnel.",
   },
 ];
 
@@ -25,10 +25,10 @@ export function Testimonials() {
       <div className="container-page">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gradient">
-            Testimonials
+            Témoignages
           </p>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl lg:text-5xl lg:leading-[1.05]">
-            Trusted by serious traders
+            Approuvé par des traders sérieux
           </h2>
         </div>
 

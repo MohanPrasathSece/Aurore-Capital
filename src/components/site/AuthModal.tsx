@@ -36,7 +36,7 @@ export function AuthModal({
           body: JSON.stringify({ email })
         });
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Failed to log in");
+        if (!res.ok) throw new Error(data.error || "Échec de la connexion");
         localStorage.setItem("aurore_user", JSON.stringify(data.user));
       } else {
         const res = await fetch("http://localhost:5000/api/signup", {
@@ -45,7 +45,7 @@ export function AuthModal({
           body: JSON.stringify({ name, email, phone })
         });
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Failed to sign up");
+        if (!res.ok) throw new Error(data.error || "Échec de l'inscription");
         localStorage.setItem("aurore_user", JSON.stringify(data.user));
       }
       localStorage.setItem('auth', 'true');
@@ -53,7 +53,7 @@ export function AuthModal({
       router.navigate({ to: '/dashboard' });
     } catch (err: any) {
       console.error(err);
-      setErrorMsg(err?.message || 'An error occurred. Please try again.');
+      setErrorMsg(err?.message || "Une erreur s'est produite. Veuillez réessayer.");
     } finally {
       setLoading(false);
     }
@@ -70,10 +70,10 @@ export function AuthModal({
         </button>
 
         <h2 className="text-center font-display text-3xl font-bold text-ink">
-          {isLogin ? 'Welcome back' : 'Create an account'}
+          {isLogin ? 'Bon retour' : 'Créer un compte'}
         </h2>
         <p className="mt-2 text-center text-base text-ink-soft">
-          {isLogin ? 'Enter your email to access your dashboard' : 'Join Aurore Capital and start trading'}
+          {isLogin ? 'Entrez votre e-mail pour accéder à votre tableau de bord' : 'Rejoignez Aurore Capital et commencez à trader'}
         </p>
 
         {errorMsg && (
@@ -87,7 +87,7 @@ export function AuthModal({
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="name" className="mb-1 block text-base font-medium text-ink">
-                  Full Name
+                  Nom complet
                 </label>
                 <input
                   id="name"
@@ -100,7 +100,7 @@ export function AuthModal({
               </div>
               <div>
                 <label htmlFor="phone" className="mb-1 block text-base font-medium text-ink">
-                  Mobile Number
+                  Numéro de mobile
                 </label>
                 <input
                   id="phone"
@@ -115,7 +115,7 @@ export function AuthModal({
           )}
           <div>
             <label htmlFor="email" className="mb-1 block text-base font-medium text-ink">
-              Email Address
+              Adresse e-mail
             </label>
             <input
               id="email"
@@ -131,14 +131,14 @@ export function AuthModal({
             disabled={loading}
             className="w-full rounded-full bg-gradient-brand py-3 text-base font-semibold text-white shadow-md transition-opacity hover:opacity-90 disabled:opacity-50"
           >
-            {loading ? 'Processing...' : isLogin ? 'Log In' : 'Sign Up'}
+            {loading ? 'Traitement...' : isLogin ? 'Se connecter' : "S'inscrire"}
           </button>
         </form>
 
         <div className="mt-6 text-center text-base text-ink-soft">
-          {isLogin ? "Don't have an account? " : 'Already have an account? '}
+          {isLogin ? "Vous n'avez pas de compte ? " : 'Vous avez déjà un compte ? '}
           <button onClick={() => setIsLogin(!isLogin)} className="font-semibold text-primary hover:underline">
-            {isLogin ? 'Sign up' : 'Log in'}
+            {isLogin ? "S'inscrire" : 'Se connecter'}
           </button>
         </div>
       </div>

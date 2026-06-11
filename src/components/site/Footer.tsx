@@ -15,8 +15,8 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-5 max-w-xs text-base leading-relaxed text-ink-soft">
-              Institutional-grade AI trading intelligence for the modern crypto
-              market.
+              Intelligence de trading IA institutionnelle pour le marché
+              crypto moderne.
             </p>
             <div className="mt-6 flex items-center gap-2">
               {[Twitter, Github, Linkedin].map((Icon, i) => (
@@ -31,16 +31,16 @@ export function Footer() {
             </div>
           </div>
 
-          <Col title="Product" links={["Signals", "Trading Bot", "Risk Manager", "Analytics"]} />
-          <Col title="Company" links={["About", "Careers", "Press", "Contact"]} />
-          <Col title="Legal" links={["Privacy Policy", "Terms of Service", "Risk Disclaimer", "Cookies"]} />
+          <Col title="Produit" links={["Signaux", "Bot de trading", "Gestion des risques", "Analytique"]} />
+          <Col title="Entreprise" links={["À propos", "Carrières", "Presse", "Contact"]} />
+          <Col title="Légal" links={["Politique de confidentialité", "Conditions d'utilisation", "Avertissement sur les risques", "Cookies"]} />
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-black/5 pt-8 text-sm text-ink-soft md:flex-row">
-          <p>© {new Date().getFullYear()} Aurore Capital AI. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Aurore Capital AI. Tous droits réservés.</p>
           <p className="max-w-xl text-center md:text-right">
-            Crypto trading involves risk. Past performance is not indicative of
-            future results. Trade responsibly.
+            Le trading de crypto implique des risques. Les performances passées ne préjugent pas des
+            résultats futurs. Tradez de manière responsable.
           </p>
         </div>
       </div>

@@ -24,7 +24,7 @@ export function Hero() {
           <span className="grid h-5 w-5 place-items-center rounded-full bg-gradient-brand text-white">
             <Sparkles className="h-3 w-3" />
           </span>
-          Introducing Aurore Capital v4 · Neural Trading Engine
+          Présentation d'Aurore Capital v4 · Moteur de trading neuronal
         </motion.div>
 
         <motion.h1
@@ -33,9 +33,9 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.05 }}
           className="mx-auto mt-6 max-w-5xl text-center font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.03em] text-ink sm:text-5xl md:text-[64px] lg:text-[80px]"
         >
-          Trade Crypto Smarter
+          Tradez la crypto plus intelligemment
           <br />
-          With <span className="text-gradient">Artificial Intelligence</span>
+          Avec <span className="text-gradient">l'intelligence artificielle</span>
         </motion.h1>
 
         <motion.p
@@ -44,8 +44,8 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.15 }}
           className="mx-auto mt-7 max-w-2xl text-center text-base leading-[1.7] text-ink-soft md:text-lg"
         >
-          Receive institutional-grade Bitcoin, Ethereum and Altcoin signals
-          powered by advanced AI and real-time market intelligence.
+          Recevez des signaux institutionnels sur Bitcoin, Ethereum et Altcoins,
+          propulsés par une IA avancée et l'intelligence de marché en temps réel.
         </motion.p>
 
         <motion.div
@@ -58,14 +58,14 @@ export function Hero() {
             href="#start"
             className="group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-4 text-base font-semibold text-white shadow-elevated transition-transform hover:-translate-y-0.5"
           >
-            Get Started
+            Commencer
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
           <a
             href="#performance"
             className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-7 py-4 text-base font-semibold text-ink shadow-card transition-colors hover:bg-secondary"
           >
-            View Live Performance
+            Voir la performance en direct
           </a>
         </motion.div>
 

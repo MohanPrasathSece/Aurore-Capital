@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 
 const faqs = [
-  { q: "How accurate are the signals?", a: "Our verified 12-month average sits at 96.8% win-rate across BTC and ETH strategies, with a 2.4× average risk-to-reward ratio. All trades are auditable in your dashboard." },
-  { q: "Which exchanges are supported?", a: "Binance, Coinbase, Bybit, OKX, Kraken, KuCoin, Bitget and MEXC. New exchanges are added based on user demand and regulatory clarity." },
-  { q: "How does the AI bot work?", a: "The bot continuously scans 400+ pairs, scores opportunities through our neural prediction engine, applies risk constraints, then executes via your exchange API. You stay in full control of capital and limits." },
-  { q: "Can beginners use it?", a: "Absolutely. The Starter plan is designed for new traders — simply receive signals on Telegram and execute manually, or enable the bot once you're comfortable." },
-  { q: "What cryptocurrencies are supported?", a: "Bitcoin, Ethereum, and 200+ liquid altcoins across spot and perpetual markets. Coverage expands monthly." },
-  { q: "How quickly are signals delivered?", a: "Signals are pushed to Telegram, Discord and the dashboard within 1–2 seconds of generation. The bot executes within milliseconds via exchange APIs." },
+  { q: "Quelle est la précision des signaux ?", a: "Notre moyenne vérifiée sur 12 mois se situe à 96,8 % de taux de réussite pour les stratégies BTC et ETH, avec un ratio risque/rendement moyen de 2,4×. Toutes les transactions sont auditables dans votre tableau de bord." },
+  { q: "Quels échanges sont pris en charge ?", a: "Binance, Coinbase, Bybit, OKX, Kraken, KuCoin, Bitget et MEXC. De nouveaux échanges sont ajoutés en fonction de la demande des utilisateurs et de la clarté réglementaire." },
+  { q: "Comment fonctionne le bot IA ?", a: "Le bot scanne en permanence plus de 400 paires, évalue les opportunités grâce à notre moteur de prédiction neuronale, applique des contraintes de risque, puis exécute via l'API de votre échange. Vous gardez le contrôle total du capital et des limites." },
+  { q: "Les débutants peuvent-ils l'utiliser ?", a: "Absolument. Le plan Starter est conçu pour les nouveaux traders — recevez simplement les signaux sur Telegram et exécutez-les manuellement, ou activez le bot une fois que vous êtes à l'aise." },
+  { q: "Quelles crypto-monnaies sont prises en charge ?", a: "Bitcoin, Ethereum et plus de 200 altcoins liquides sur les marchés au comptant et perpétuels. La couverture s'étend chaque mois." },
+  { q: "À quelle vitesse les signaux sont-ils envoyés ?", a: "Les signaux sont envoyés sur Telegram, Discord et le tableau de bord dans les 1 à 2 secondes suivant leur génération. Le bot s'exécute en quelques millisecondes via les API d'échange." },
 ];
 
 export function Faq() {
@@ -18,7 +18,7 @@ export function Faq() {
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gradient">FAQ</p>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl lg:text-5xl lg:leading-[1.05]">
-            Questions, answered.
+            Vos questions, nos réponses.
           </h2>
         </div>
 
