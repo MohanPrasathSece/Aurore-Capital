@@ -36,6 +36,7 @@ function Contact() {
       if (!res.ok) throw new Error("Failed");
       setSuccess(true);
       (e.target as HTMLFormElement).reset();
+      setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
       console.error(err);
       alert("Erreur lors de l'envoi du message. Veuillez réessayer.");

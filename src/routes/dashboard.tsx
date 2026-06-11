@@ -59,6 +59,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -84,8 +85,9 @@ function Dashboard() {
         })
       });
       if (!res.ok) throw new Error("Failed");
-      alert("Message envoyé au bureau institutionnel !");
+      setSuccess(true);
       (e.target as HTMLFormElement).reset();
+      setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
       console.error(err);
       alert("Erreur lors de l'envoi du message.");
@@ -342,7 +344,13 @@ function Dashboard() {
               Vous avez des questions ou besoin d'aide pour votre portefeuille ? Envoyez-nous un message et notre équipe d'assistance vous répondra sous peu.
             </p>
 
-            <form className="mt-8 space-y-5 text-left" onSubmit={handleSubmit}>
+            {success ? (
+              <div className="mt-8 text-center py-12 rounded-3xl border border-primary/20 bg-emerald-50/50">
+                <h3 className="text-2xl font-bold text-emerald-600">Message envoyé !</h3>
+                <p className="mt-2 text-ink-soft">Nous vous répondrons sous peu.</p>
+              </div>
+            ) : (
+              <form className="mt-8 space-y-5 text-left" onSubmit={handleSubmit}>
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label className="mb-1.5 block text-sm font-medium text-ink">Nom complet</label>
@@ -388,6 +396,7 @@ function Dashboard() {
                 {loading ? "Envoi en cours..." : "Envoyer le message"}
               </button>
             </form>
+            )}
           </div>
         </div>
 
