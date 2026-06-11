@@ -9,16 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ExportDataRouteImport } from './routes/export-data'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AdminPortalSecureAccess8f92jRouteImport } from './routes/admin-portal-secure-access-8f92j'
 import { Route as IndexRouteImport } from './routes/index'
 
-const ExportDataRoute = ExportDataRouteImport.update({
-  id: '/export-data',
-  path: '/export-data',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -29,6 +24,12 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPortalSecureAccess8f92jRoute =
+  AdminPortalSecureAccess8f92jRouteImport.update({
+    id: '/admin-portal-secure-access-8f92j',
+    path: '/admin-portal-secure-access-8f92j',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,47 +38,49 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin-portal-secure-access-8f92j': typeof AdminPortalSecureAccess8f92jRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
-  '/export-data': typeof ExportDataRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin-portal-secure-access-8f92j': typeof AdminPortalSecureAccess8f92jRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
-  '/export-data': typeof ExportDataRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin-portal-secure-access-8f92j': typeof AdminPortalSecureAccess8f92jRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
-  '/export-data': typeof ExportDataRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/dashboard' | '/export-data'
+  fullPaths:
+    | '/'
+    | '/admin-portal-secure-access-8f92j'
+    | '/contact'
+    | '/dashboard'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/dashboard' | '/export-data'
-  id: '__root__' | '/' | '/contact' | '/dashboard' | '/export-data'
+  to: '/' | '/admin-portal-secure-access-8f92j' | '/contact' | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin-portal-secure-access-8f92j'
+    | '/contact'
+    | '/dashboard'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminPortalSecureAccess8f92jRoute: typeof AdminPortalSecureAccess8f92jRoute
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
-  ExportDataRoute: typeof ExportDataRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/export-data': {
-      id: '/export-data'
-      path: '/export-data'
-      fullPath: '/export-data'
-      preLoaderRoute: typeof ExportDataRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -92,6 +95,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin-portal-secure-access-8f92j': {
+      id: '/admin-portal-secure-access-8f92j'
+      path: '/admin-portal-secure-access-8f92j'
+      fullPath: '/admin-portal-secure-access-8f92j'
+      preLoaderRoute: typeof AdminPortalSecureAccess8f92jRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,20 +114,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminPortalSecureAccess8f92jRoute: AdminPortalSecureAccess8f92jRoute,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
-  ExportDataRoute: ExportDataRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

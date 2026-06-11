@@ -36,9 +36,29 @@ const activePositions = [
   { id: 2, pair: 'ETH/USD', size: '10 ETH', entry: '$3,450', current: '$3,410', pnl: '-$400.00', pnlPercent: '-1.15%', status: 'Active' },
 ];
 
+function StatCard({ title, value, change, icon: Icon }: any) {
+  return (
+    <div className="rounded-3xl border border-primary/10 bg-white p-6 shadow-elevated">
+      <div className="flex justify-between items-start">
+        <div>
+          <p className="text-sm text-ink-soft">{title}</p>
+          <h3 className="text-2xl font-bold text-ink mt-1">{value}</h3>
+        </div>
+        <div className="rounded-xl bg-primary/5 p-2 text-primary">
+          <Icon className="h-5 w-5" />
+        </div>
+      </div>
+      <p className="text-xs font-semibold text-emerald-600 mt-4 flex items-center gap-1">
+        <ArrowUpRight className="h-3 w-3" /> {change} from last period
+      </p>
+    </div>
+  );
+}
+
 function Dashboard() {
   const navigate = useNavigate();
   const [mounted, setMounted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -47,6 +67,33 @@ function Dashboard() {
       navigate({ to: '/', search: { auth: 'login' } });
     }
   }, [navigate]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData(e.currentTarget);
+    try {
+      const res = await fetch("http://localhost:5000/api/institutional", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name") as string,
+          email: formData.get("email") as string,
+          phone: formData.get("phone") as string,
+          company: formData.get("company") as string,
+          message: formData.get("message") as string,
+        })
+      });
+      if (!res.ok) throw new Error("Failed");
+      alert("Message sent to institutional desk!");
+      (e.target as HTMLFormElement).reset();
+    } catch (err) {
+      console.error(err);
+      alert("Error sending message.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!mounted) return null;
 
@@ -237,27 +284,44 @@ function Dashboard() {
                 Ready to deploy larger capital? Speak directly with our institutional trading desk to increase your API limits and get a dedicated account manager.
               </p>
             </div>
-            <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); alert("Message sent to institutional desk!"); }}>
-              <input 
-                type="text" 
-                placeholder="Full Name" 
-                className="w-full rounded-xl border border-black/5 bg-black/[0.02] px-4 py-3 text-base text-ink placeholder-ink-soft/60 outline-none transition-all focus:border-primary/40 focus:bg-white focus:ring-4 focus:ring-primary/10" 
-                required
-              />
-              <input 
-                type="email" 
-                placeholder="Institutional Email" 
-                className="w-full rounded-xl border border-black/5 bg-black/[0.02] px-4 py-3 text-base text-ink placeholder-ink-soft/60 outline-none transition-all focus:border-primary/40 focus:bg-white focus:ring-4 focus:ring-primary/10" 
-                required
-              />
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <input 
+                  type="text" 
+                  name="name"
+                  placeholder="Full Name" 
+                  className="w-full rounded-xl border border-black/5 bg-black/[0.02] px-4 py-3 text-base text-ink placeholder-ink-soft/60 outline-none transition-all focus:border-primary/40 focus:bg-white focus:ring-4 focus:ring-primary/10" 
+                  required
+                />
+                <input 
+                  type="email" 
+                  name="email"
+                  placeholder="Institutional Email" 
+                  className="w-full rounded-xl border border-black/5 bg-black/[0.02] px-4 py-3 text-base text-ink placeholder-ink-soft/60 outline-none transition-all focus:border-primary/40 focus:bg-white focus:ring-4 focus:ring-primary/10" 
+                  required
+                />
+                <input 
+                  type="tel" 
+                  name="phone"
+                  placeholder="Phone Number" 
+                  className="w-full rounded-xl border border-black/5 bg-black/[0.02] px-4 py-3 text-base text-ink placeholder-ink-soft/60 outline-none transition-all focus:border-primary/40 focus:bg-white focus:ring-4 focus:ring-primary/10" 
+                />
+                <input 
+                  type="text" 
+                  name="company"
+                  placeholder="Company Name" 
+                  className="w-full rounded-xl border border-black/5 bg-black/[0.02] px-4 py-3 text-base text-ink placeholder-ink-soft/60 outline-none transition-all focus:border-primary/40 focus:bg-white focus:ring-4 focus:ring-primary/10" 
+                />
+              </div>
               <textarea 
-                placeholder="Expected Monthly Volume" 
+                name="message"
+                placeholder="Expected Monthly Volume / Additional Information" 
                 rows={3}
                 className="w-full rounded-xl border border-black/5 bg-black/[0.02] px-4 py-3 text-base text-ink placeholder-ink-soft/60 outline-none transition-all focus:border-primary/40 focus:bg-white focus:ring-4 focus:ring-primary/10" 
                 required
               />
-              <button type="submit" className="w-full rounded-full bg-gradient-brand shadow-md px-6 py-3.5 text-base font-semibold text-white transition-opacity hover:opacity-90">
-                Contact Desk
+              <button type="submit" disabled={loading} className="w-full rounded-full bg-gradient-brand shadow-md px-6 py-3.5 text-base font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50">
+                {loading ? "Sending..." : "Contact Desk"}
               </button>
             </form>
           </div>
@@ -269,20 +333,4 @@ function Dashboard() {
   );
 }
 
-function StatCard({ title, value, change, icon: Icon }: { title: string; value: string; change: string; icon: any }) {
-  const isPositive = change.startsWith('+');
-  return (
-    <div className="rounded-3xl border border-primary/10 bg-white p-6 shadow-card flex items-center gap-5">
-      <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 text-primary">
-        <Icon className="h-6 w-6" />
-      </div>
-      <div>
-        <p className="text-sm font-medium text-ink-soft">{title}</p>
-        <p className="text-2xl font-bold text-ink mt-0.5">{value}</p>
-        <p className={`text-xs mt-1 font-medium ${isPositive ? 'text-emerald-600' : 'text-rose-600'}`}>
-          {change} from yesterday
-        </p>
-      </div>
-    </div>
-  );
-}
+

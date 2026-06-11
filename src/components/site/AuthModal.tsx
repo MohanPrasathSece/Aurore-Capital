@@ -1,51 +1,21 @@
-import { useState } from 'react';
-import { createServerFn } from '@tanstack/react-start';
-import { saveUser, getUsers } from '@/lib/excel-db';
-import { sendEmail } from '@/lib/email';
-import { useNavigate, useRouter } from '@tanstack/react-router';
-import { X } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { X } from "lucide-react";
+import { useRouter } from "@tanstack/react-router";
 
-const signupFn = createServerFn({ method: 'POST' })
-  .validator((data: { name: string; email: string; phone: string }) => data)
-  .handler(async ({ data }) => {
-    const users = getUsers();
-    if (users.some((u: any) => u.email === data.email)) {
-      throw new Error("Email already registered. Please log in.");
-    }
-
-    const user = {
-      id: Math.random().toString(36).substring(7),
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      signupDate: new Date().toISOString(),
-    };
-    saveUser(user);
-
-    // Send email to admin
-    await sendEmail({
-      to: process.env.ADMIN_EMAIL || 'admin@aurorecapital.com',
-      subject: 'New User Signup: Aurore Capital',
-      text: `A new user has signed up.\n\nName: ${user.name}\nEmail: ${user.email}\nPhone: ${user.phone}\nDate: ${user.signupDate}`,
-    });
-
-    return { success: true, user };
-  });
-
-const loginFn = createServerFn({ method: 'POST' })
-  .validator((data: { email: string }) => data)
-  .handler(async ({ data }) => {
-    const users = getUsers();
-    if (!users.some((u: any) => u.email === data.email)) {
-      throw new Error("Account not found. Please sign up first.");
-    }
-    return { success: true, email: data.email };
-  });
-
-export function AuthModal({ type, onClose }: { type: 'login' | 'signup'; onClose: () => void }) {
+export function AuthModal({
+  type,
+  onClose,
+}: {
+  type: "login" | "signup";
+  onClose: () => void;
+}) {
   const [isLogin, setIsLogin] = useState(type === 'login');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setIsLogin(type === 'login');
+  }, [type]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

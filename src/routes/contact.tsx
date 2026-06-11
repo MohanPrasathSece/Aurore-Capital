@@ -2,21 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Mail, Phone, MapPin, Twitter, Linkedin, Github, ArrowUpRight } from "lucide-react";
-import { createServerFn } from "@tanstack/react-start";
-import { sendEmail } from "@/lib/email";
 import { useState } from "react";
-
-const submitContactForm = createServerFn({ method: "POST" })
-  .validator((data: { name: string; email: string; phone: string; company: string; message: string }) => data)
-  .handler(async ({ data }) => {
-    const { name, email, phone, company, message } = data;
-    await sendEmail({
-      to: process.env.ADMIN_EMAIL || "admin@aurorecapital.com",
-      subject: `New Contact Form Submission from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nCompany: ${company}\nMessage: ${message}`,
-    });
-    return { success: true };
-  });
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -37,20 +23,23 @@ function Contact() {
     setLoading(true);
     const formData = new FormData(e.currentTarget);
     try {
-      await submitContactForm({
-        data: {
+      const res = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           name: formData.get("name") as string,
           email: formData.get("email") as string,
           phone: formData.get("phone") as string,
           company: formData.get("company") as string,
           message: formData.get("message") as string,
-        },
+        })
       });
+      if (!res.ok) throw new Error("Failed");
       setSuccess(true);
       (e.target as HTMLFormElement).reset();
     } catch (err) {
       console.error(err);
-      alert("Error sending message.");
+      alert("Error sending message. Please try again.");
     } finally {
       setLoading(false);
     }
