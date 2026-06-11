@@ -125,8 +125,8 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="fixed inset-x-4 top-20 z-40 rounded-3xl border border-primary/10 bg-background/95 p-4 shadow-elevated backdrop-blur-xl lg:hidden">
-          <nav className="flex flex-col">
+        <div className="fixed inset-0 z-40 bg-background/98 pt-28 px-6 pb-6 backdrop-blur-2xl lg:hidden flex flex-col h-[100dvh]">
+          <nav className="flex flex-col flex-1 gap-2">
             {!isAuth && (
               <>
                 {navLinks.map((l) => (
@@ -134,7 +134,7 @@ export function Header() {
                     key={l.label}
                     href={l.href}
                     onClick={() => setOpen(false)}
-                    className="rounded-2xl px-4 py-3 text-lg font-medium text-ink hover:bg-primary/5"
+                    className="rounded-2xl px-5 py-4 text-2xl font-semibold text-ink hover:bg-primary/5 transition-colors"
                   >
                     {l.label}
                   </a>
@@ -142,7 +142,7 @@ export function Header() {
                 <Link
                   to="/contact"
                   onClick={() => setOpen(false)}
-                  className="rounded-2xl px-4 py-3 text-lg font-medium text-ink hover:bg-primary/5"
+                  className="rounded-2xl px-5 py-4 text-2xl font-semibold text-ink hover:bg-primary/5 transition-colors"
                 >
                   Contact
                 </Link>
@@ -153,34 +153,36 @@ export function Header() {
                 <Link
                   to="/dashboard"
                   onClick={() => setOpen(false)}
-                  className="rounded-2xl px-4 py-3 text-lg font-medium text-ink hover:bg-primary/5"
+                  className="rounded-2xl px-5 py-4 text-2xl font-semibold text-ink hover:bg-primary/5 transition-colors"
                 >
                   Tableau de bord
                 </Link>
-                <button
-                  onClick={() => { setOpen(false); handleLogout(); }}
-                  className="mt-2 rounded-full bg-primary px-4 py-3 text-center text-lg font-semibold text-white"
-                >
-                  Déconnexion
-                </button>
+                <div className="mt-auto pt-6 border-t border-black/5">
+                  <button
+                    onClick={() => { setOpen(false); handleLogout(); }}
+                    className="w-full rounded-full bg-primary px-6 py-4 text-center text-lg font-semibold text-white transition-opacity hover:opacity-90"
+                  >
+                    Déconnexion
+                  </button>
+                </div>
               </>
             ) : (
-              <>
+              <div className="mt-auto pt-6 border-t border-black/5 flex flex-col gap-3">
                 <Link
                   search={{ auth: "login" }}
                   onClick={() => setOpen(false)}
-                  className="rounded-2xl px-4 py-3 text-lg font-medium text-ink hover:bg-primary/5"
+                  className="w-full rounded-full border border-primary/20 bg-transparent px-6 py-4 text-center text-lg font-semibold text-ink transition-colors hover:bg-primary/5"
                 >
                   Connexion
                 </Link>
                 <Link
                   search={{ auth: "signup" }}
                   onClick={() => setOpen(false)}
-                  className="mt-2 rounded-full bg-primary px-4 py-3 text-center text-lg font-semibold text-white"
+                  className="w-full rounded-full bg-primary px-6 py-4 text-center text-lg font-semibold text-white transition-opacity hover:opacity-90"
                 >
                   S'inscrire
                 </Link>
-              </>
+              </div>
             )}
           </nav>
         </div>
