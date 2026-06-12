@@ -41,6 +41,7 @@ export function Header() {
         <Link 
           to="/" 
           onClick={(e) => {
+            setOpen(false);
             if (window.location.pathname === "/") {
               window.scrollTo({ top: 0, behavior: "smooth" });
             } else if (window.location.pathname === "/dashboard") {
@@ -157,12 +158,18 @@ export function Header() {
                 >
                   Tableau de bord
                 </Link>
-                <div className="mt-auto pt-6 border-t border-black/5">
+                <div className="mt-auto pt-6 border-t border-black/5 flex flex-col gap-3">
                   <button
                     onClick={() => { setOpen(false); handleLogout(); }}
                     className="w-full rounded-full bg-primary px-6 py-4 text-center text-lg font-semibold text-white transition-opacity hover:opacity-90"
                   >
                     Déconnexion
+                  </button>
+                  <button
+                    onClick={() => setOpen(false)}
+                    className="w-full rounded-full bg-transparent px-6 py-4 text-center text-lg font-semibold text-ink-soft transition-colors hover:bg-black/5"
+                  >
+                    Fermer le menu
                   </button>
                 </div>
               </>
@@ -182,6 +189,12 @@ export function Header() {
                 >
                   S'inscrire
                 </Link>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="w-full rounded-full bg-transparent px-6 py-4 text-center text-lg font-semibold text-ink-soft transition-colors hover:bg-black/5"
+                >
+                  Fermer le menu
+                </button>
               </div>
             )}
           </nav>
