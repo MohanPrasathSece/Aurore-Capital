@@ -1,10 +1,9 @@
 import express from 'express';
 import cors from 'cors';
-import fs from 'fs';
-import path from 'path';
 import xlsx from 'xlsx';
 import dotenv from 'dotenv';
-import https from 'https';
+import { put, list } from '@vercel/blob';
+
 dotenv.config();
 
 const app = express();
@@ -13,68 +12,58 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-const DB_DIR = path.resolve(process.cwd(), 'data');
-const DB_FILE = path.resolve(DB_DIR, 'users.xlsx');
-const DB_CONTACTS_FILE = path.resolve(DB_DIR, 'contacts.xlsx');
+const BLOB_TOKEN = process.env.BLOB_READ_WRITE_TOKEN;
 
-// Initialize DBs
-function initDB() {
-  if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
-  if (!fs.existsSync(DB_FILE)) {
-    const wb = xlsx.utils.book_new();
-    const ws = xlsx.utils.json_to_sheet([]);
-    xlsx.utils.book_append_sheet(wb, ws, 'Users');
-    const buf = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
-    fs.writeFileSync(DB_FILE, buf);
+// Vercel Blob Helpers
+async function getBlobData(filename) {
+  try {
+    const { blobs } = await list({ prefix: filename, token: BLOB_TOKEN });
+    if (blobs.length > 0) {
+      const res = await fetch(blobs[0].url, {
+        headers: { Authorization: `Bearer ${BLOB_TOKEN}` }
+      });
+      if (res.ok) return await res.json();
+    }
+    return []; // Return empty array if not found
+  } catch (err) {
+    console.error(`Error fetching ${filename} from Blob:`, err);
+    return [];
   }
 }
 
-function initContactsDB() {
-  if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
-  if (!fs.existsSync(DB_CONTACTS_FILE)) {
-    const wb = xlsx.utils.book_new();
-    const ws = xlsx.utils.json_to_sheet([]);
-    xlsx.utils.book_append_sheet(wb, ws, 'Contacts');
-    const buf = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
-    fs.writeFileSync(DB_CONTACTS_FILE, buf);
+async function saveBlobData(filename, data) {
+  try {
+    await put(filename, JSON.stringify(data, null, 2), {
+      access: 'public', // Using public to ensure fetch without auth logic works easily if needed, but since we have token we could use private.
+      token: BLOB_TOKEN,
+      addRandomSuffix: false
+    });
+    return true;
+  } catch (err) {
+    console.error(`Error saving ${filename} to Blob:`, err);
+    return false;
   }
 }
 
 // Helpers
-function getUsers() {
-  initDB();
-  const buf = fs.readFileSync(DB_FILE);
-  const wb = xlsx.read(buf, { type: 'buffer' });
-  const ws = wb.Sheets['Users'];
-  return xlsx.utils.sheet_to_json(ws);
+async function getUsers() {
+  return await getBlobData('aurore_users.json');
 }
 
-function saveUser(user) {
-  const users = getUsers();
+async function saveUser(user) {
+  const users = await getUsers();
   users.push(user);
-  const wb = xlsx.utils.book_new();
-  const ws = xlsx.utils.json_to_sheet(users);
-  xlsx.utils.book_append_sheet(wb, ws, 'Users');
-  const buf = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
-  fs.writeFileSync(DB_FILE, buf);
+  await saveBlobData('aurore_users.json', users);
 }
 
-function getContacts() {
-  initContactsDB();
-  const buf = fs.readFileSync(DB_CONTACTS_FILE);
-  const wb = xlsx.read(buf, { type: 'buffer' });
-  const ws = wb.Sheets['Contacts'];
-  return xlsx.utils.sheet_to_json(ws);
+async function getContacts() {
+  return await getBlobData('aurore_contacts.json');
 }
 
-function saveContact(contact) {
-  const contacts = getContacts();
+async function saveContact(contact) {
+  const contacts = await getContacts();
   contacts.push(contact);
-  const wb = xlsx.utils.book_new();
-  const ws = xlsx.utils.json_to_sheet(contacts);
-  xlsx.utils.book_append_sheet(wb, ws, 'Contacts');
-  const buf = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
-  fs.writeFileSync(DB_CONTACTS_FILE, buf);
+  await saveBlobData('aurore_contacts.json', contacts);
 }
 
 // Helpers for CRM API
@@ -123,9 +112,9 @@ async function syncAffiliateToCRM(data, source = 'website') {
 }
 
 // Routes
-app.post('/api/signup', (req, res) => {
+app.post('/api/signup', async (req, res) => {
   const { name, email, phone } = req.body;
-  const users = getUsers();
+  const users = await getUsers();
   if (users.find(u => u.email === email)) {
     return res.status(400).json({ error: 'Email already exists' });
   }
@@ -134,7 +123,7 @@ app.post('/api/signup', (req, res) => {
     name, email, phone,
     signupDate: new Date().toISOString()
   };
-  saveUser(newUser);
+  await saveUser(newUser);
   
   // Sync to CRM
   syncAffiliateToCRM({ ...newUser, message: 'Signup' }, 'signup');
@@ -142,9 +131,9 @@ app.post('/api/signup', (req, res) => {
   res.json({ success: true, user: newUser });
 });
 
-app.post('/api/login', (req, res) => {
+app.post('/api/login', async (req, res) => {
   const { email } = req.body;
-  const users = getUsers();
+  const users = await getUsers();
   const user = users.find(u => u.email === email);
   if (!user) {
     return res.status(400).json({ error: 'User not found. Please create an account.' });
@@ -154,7 +143,7 @@ app.post('/api/login', (req, res) => {
 
 app.post('/api/contact', async (req, res) => {
   const { name, email, phone, message } = req.body;
-  saveContact({
+  await saveContact({
     id: Math.random().toString(36).substring(7),
     name, email, phone, message,
     date: new Date().toISOString()
@@ -168,7 +157,7 @@ app.post('/api/contact', async (req, res) => {
 
 app.post('/api/institutional', async (req, res) => {
   const { name, email, phone, message } = req.body;
-  saveContact({
+  await saveContact({
     id: Math.random().toString(36).substring(7),
     name, email, phone, message,
     date: new Date().toISOString()
@@ -180,21 +169,29 @@ app.post('/api/institutional', async (req, res) => {
   res.json({ success: true });
 });
 
-app.get('/api/x-secure-admin/data/users', (req, res) => {
+app.get('/api/x-secure-admin/data/users', async (req, res) => {
   if (req.query.key !== 'aurore-admin-2026') return res.status(403).json({ error: 'Unauthorized' });
-  initDB();
-  const buf = fs.readFileSync(DB_FILE);
+  const users = await getUsers();
+  
+  const wb = xlsx.utils.book_new();
+  const ws = xlsx.utils.json_to_sheet(users);
+  xlsx.utils.book_append_sheet(wb, ws, 'Users');
+  const buf = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
+  
   res.json({ base64: buf.toString('base64') });
 });
 
-app.get('/api/x-secure-admin/data/contacts', (req, res) => {
+app.get('/api/x-secure-admin/data/contacts', async (req, res) => {
   if (req.query.key !== 'aurore-admin-2026') return res.status(403).json({ error: 'Unauthorized' });
-  initContactsDB();
-  const buf = fs.readFileSync(DB_CONTACTS_FILE);
+  const contacts = await getContacts();
+  
+  const wb = xlsx.utils.book_new();
+  const ws = xlsx.utils.json_to_sheet(contacts);
+  xlsx.utils.book_append_sheet(wb, ws, 'Contacts');
+  const buf = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
+  
   res.json({ base64: buf.toString('base64') });
 });
-
-
 
 app.listen(PORT, () => {
   console.log(`Express server running on http://localhost:${PORT}`);
