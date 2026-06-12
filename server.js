@@ -24,8 +24,9 @@ async function getBlobData(filename) {
   try {
     const { blobs } = await list({ prefix: filename, token: BLOB_TOKEN });
     if (blobs.length > 0) {
-      const res = await fetch(blobs[0].url, {
-        headers: { Authorization: `Bearer ${BLOB_TOKEN}` }
+      const res = await fetch(`${blobs[0].url}?t=${Date.now()}`, {
+        headers: { Authorization: `Bearer ${BLOB_TOKEN}` },
+        cache: 'no-store'
       });
       if (res.ok) return await res.json();
     }
@@ -58,7 +59,8 @@ async function getUsers() {
 async function saveUser(user) {
   const users = await getUsers();
   users.push(user);
-  await saveBlobData('aurore_users.json', users);
+  const success = await saveBlobData('aurore_users.json', users);
+  if (!success) throw new Error('Failed to save user to storage');
 }
 
 async function getContacts() {
@@ -128,12 +130,16 @@ app.post('/api/signup', async (req, res) => {
     name, email, phone,
     signupDate: new Date().toISOString()
   };
-  await saveUser(newUser);
   
-  // Sync to CRM
-  syncAffiliateToCRM({ ...newUser, message: 'Signup' }, 'signup');
-  
-  res.json({ success: true, user: newUser });
+  try {
+    await saveUser(newUser);
+    // Sync to CRM
+    syncAffiliateToCRM({ ...newUser, message: 'Signup' }, 'signup');
+    res.json({ success: true, user: newUser });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create account. Please ensure Vercel Blob is configured correctly.' });
+  }
 });
 
 app.post('/api/login', async (req, res) => {
