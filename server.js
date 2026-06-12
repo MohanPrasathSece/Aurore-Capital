@@ -3,11 +3,16 @@ import cors from 'cors';
 import xlsx from 'xlsx';
 import dotenv from 'dotenv';
 import { put, list } from '@vercel/blob';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -191,6 +196,14 @@ app.get('/api/x-secure-admin/data/contacts', async (req, res) => {
   const buf = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
   
   res.json({ base64: buf.toString('base64') });
+});
+
+// Serve static files from the Vite build (dist)
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Fallback for React Router
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {

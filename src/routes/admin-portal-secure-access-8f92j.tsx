@@ -11,7 +11,8 @@ function ExportData() {
   const handleDownload = async (type: 'users' | 'contacts') => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:5000/api/x-secure-admin/data/${type}?key=aurore-admin-2026`);
+      const API_URL = import.meta.env.PROD ? "" : "http://localhost:5000";
+      const res = await fetch(`${API_URL}/api/x-secure-admin/data/${type}?key=aurore-admin-2026`);
       if (!res.ok) throw new Error("Failed to fetch");
       const data = await res.json();
       

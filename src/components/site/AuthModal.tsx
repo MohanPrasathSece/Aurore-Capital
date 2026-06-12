@@ -28,9 +28,11 @@ export function AuthModal({
     const name = formData.get('name') as string;
     const phone = formData.get('phone') as string;
 
+    const API_URL = import.meta.env.PROD ? "" : "http://localhost:5000";
+
     try {
       if (isLogin) {
-        const res = await fetch("http://localhost:5000/api/login", {
+        const res = await fetch(`${API_URL}/api/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email })
@@ -39,7 +41,7 @@ export function AuthModal({
         if (!res.ok) throw new Error(data.error || "Échec de la connexion");
         localStorage.setItem("aurore_user", JSON.stringify(data.user));
       } else {
-        const res = await fetch("http://localhost:5000/api/signup", {
+        const res = await fetch(`${API_URL}/api/signup`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name, email, phone })

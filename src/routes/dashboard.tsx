@@ -74,7 +74,8 @@ function Dashboard() {
     setLoading(true);
     const formData = new FormData(e.currentTarget);
     try {
-      const res = await fetch("http://localhost:5000/api/institutional", {
+      const API_URL = import.meta.env.PROD ? "" : "http://localhost:5000";
+      const res = await fetch(`${API_URL}/api/institutional`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
