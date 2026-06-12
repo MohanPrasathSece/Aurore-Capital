@@ -199,13 +199,18 @@ app.get('/api/x-secure-admin/data/contacts', async (req, res) => {
 });
 
 // Serve static files from the Vite build (dist)
-app.use(express.static(path.join(__dirname, 'dist')));
+// Note: Vercel serves static files automatically, but this handles local / non-Vercel deployments.
+if (!process.env.VERCEL) {
+  app.use(express.static(path.join(__dirname, 'dist')));
 
-// Fallback for React Router
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
+  // Fallback for React Router
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  });
 
-app.listen(PORT, () => {
-  console.log(`Express server running on http://localhost:${PORT}`);
-});
+  app.listen(PORT, () => {
+    console.log(`Express server running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
