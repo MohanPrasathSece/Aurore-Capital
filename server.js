@@ -40,9 +40,10 @@ async function getBlobData(filename) {
 async function saveBlobData(filename, data) {
   try {
     await put(filename, JSON.stringify(data, null, 2), {
-      access: 'public', // Using public to ensure fetch without auth logic works easily if needed, but since we have token we could use private.
+      access: 'private',
       token: BLOB_TOKEN,
-      addRandomSuffix: false
+      addRandomSuffix: false,
+      allowOverwrite: true
     });
     return true;
   } catch (err) {
