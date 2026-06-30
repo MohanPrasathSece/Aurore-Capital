@@ -60,6 +60,7 @@ function Dashboard() {
   const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     setMounted(true);
@@ -72,7 +73,23 @@ function Dashboard() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setErrorMsg("");
     const formData = new FormData(e.currentTarget);
+    const phone = formData.get("phone") as string;
+
+    if (phone !== null) {
+      const cleanNum = phone.replace(/\s+/g, "");
+      if (!cleanNum) {
+        setErrorMsg("Veuillez entrer un numéro de téléphone");
+        setLoading(false);
+        return;
+      } else if (!/^(\+41|0041|0)?[1-9]\d{8}$/.test(cleanNum)) {
+        setErrorMsg("Veuillez entrer un numéro suisse valide (ex: 079 123 45 67)");
+        setLoading(false);
+        return;
+      }
+    }
+
     try {
       const API_URL = import.meta.env.PROD ? "" : "http://localhost:5000";
       const res = await fetch(`${API_URL}/api/institutional`, {
@@ -356,6 +373,11 @@ function Dashboard() {
               </div>
             ) : (
               <form className="mt-8 space-y-5 text-left" onSubmit={handleSubmit}>
+                {errorMsg && (
+                  <div className="rounded-xl bg-rose-50 p-4 text-center text-sm font-semibold text-rose-600 border border-rose-100">
+                    {errorMsg}
+                  </div>
+                )}
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label className="mb-1.5 block text-sm font-medium text-ink">Nom complet</label>
@@ -394,7 +416,6 @@ function Dashboard() {
                   placeholder="Comment pouvons-nous vous aider aujourd'hui ?" 
                   rows={4}
                   className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
-                  required
                 />
               </div>
               <button type="submit" disabled={loading} className="w-full rounded-full bg-gradient-brand shadow-md px-6 py-4 text-base font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50">
