@@ -30,6 +30,19 @@ export function AuthModal({
 
     const API_URL = import.meta.env.PROD ? "" : "http://localhost:5000";
 
+    if (!isLogin) {
+      const cleanNum = phone.replace(/\s+/g, "");
+      if (!cleanNum) {
+        setErrorMsg("Veuillez entrer un numéro de téléphone");
+        setLoading(false);
+        return;
+      } else if (!/^(\+41|0041|0)?[1-9]\d{8}$/.test(cleanNum)) {
+        setErrorMsg("Veuillez entrer un numéro suisse valide (ex: 079 123 45 67)");
+        setLoading(false);
+        return;
+      }
+    }
+
     try {
       if (isLogin) {
         const res = await fetch(`${API_URL}/api/login`, {

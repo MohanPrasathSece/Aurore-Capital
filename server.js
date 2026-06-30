@@ -82,19 +82,37 @@ async function syncAffiliateToCRM(data, source = 'website') {
   }
   
   try {
-    const nameParts = (data.name || '').split(' ');
-    const firstName = nameParts[0] || 'Unknown';
-    const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : 'Doe';
-    
+    const [first_name, ...lastNameParts] = (data.name || "Unknown").trim().split(" ");
+    const last_name = lastNameParts.length > 0 ? lastNameParts.join(" ") : "Lead";
+
+    let phone = (data.phone || "").replace(/[^0-9+]/g, '');
+    if (phone) {
+      if (phone.startsWith('+')) {
+        phone = '00' + phone.slice(1);
+      }
+      if (phone.startsWith('41') && phone.length === 11) {
+        phone = '00' + phone;
+      }
+      if (!phone.startsWith('0041')) {
+        if (phone.startsWith('0') && !phone.startsWith('00')) {
+          phone = '0041' + phone.slice(1);
+        } else if (!phone.startsWith('00')) {
+          phone = '0041' + phone;
+        }
+      }
+    } else {
+      phone = "0000000000";
+    }
+
     const payload = {
-      country_name: "cy",
-      description: data.message || `Signup from ${source}`,
-      phone: data.phone || "0000000000",
+      country_name: "ch",
+      description: data.message || "Signup Lead",
+      phone: phone,
       email: data.email || "no-email@example.com",
-      first_name: firstName,
-      last_name: lastName,
+      first_name: first_name,
+      last_name: last_name,
       custom_fields: {
-        Source_ID: source,
+        Source_ID: "website",
         How_Much_Invested: "0",
         Outline_Your_Case: data.message || ""
       }

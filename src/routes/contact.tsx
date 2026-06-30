@@ -17,11 +17,29 @@ export const Route = createFileRoute("/contact")({
 function Contact() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setErrorMsg("");
+
     const formData = new FormData(e.currentTarget);
+    const phone = formData.get("phone") as string;
+
+    if (phone !== null) {
+      const cleanNum = phone.replace(/\s+/g, "");
+      if (!cleanNum) {
+        setErrorMsg("Veuillez entrer un numéro de téléphone");
+        setLoading(false);
+        return;
+      } else if (!/^(\+41|0041|0)?[1-9]\d{8}$/.test(cleanNum)) {
+        setErrorMsg("Veuillez entrer un numéro suisse valide (ex: 079 123 45 67)");
+        setLoading(false);
+        return;
+      }
+    }
+
     try {
       const API_URL = import.meta.env.PROD ? "" : "http://localhost:5000";
       const res = await fetch(`${API_URL}/api/contact`, {
@@ -87,8 +105,13 @@ function Contact() {
                   </div>
                   <div className="mt-5">
                     <label className="text-sm font-medium text-ink">Message</label>
-                    <textarea name="message" required rows={5} className="mt-2 w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" />
+                    <textarea name="message" rows={5} className="mt-2 w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" />
                   </div>
+                  {errorMsg && (
+                    <div className="mt-4 rounded-xl bg-rose-50 p-4 text-center text-sm font-semibold text-rose-600 border border-rose-100">
+                      {errorMsg}
+                    </div>
+                  )}
                   <button type="submit" disabled={loading} className="group mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-7 py-4 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 disabled:opacity-50">
                     {loading ? "Envoi en cours..." : "Envoyer le message"}
                   </button>
