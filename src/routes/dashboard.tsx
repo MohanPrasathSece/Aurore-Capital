@@ -98,7 +98,7 @@ function Dashboard() {
         body: JSON.stringify({
           name: formData.get("name") as string,
           email: formData.get("email") as string,
-          phone: formData.get("phone") as string,
+          phone: formData.get("phone") as string, countryCode: typeof formData !== 'undefined' ? formData.get('countryCode') : 'CH',
           message: formData.get("message") as string,
         })
       });
@@ -402,12 +402,21 @@ function Dashboard() {
               </div>
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-ink">Numéro de téléphone</label>
-                <input 
+                
+<div style={{ display: 'flex', gap: '8px', width: '100%' }}>
+    <select name="countryCode" style={{ width: '110px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', color: '#fff', padding: '0.8rem', fontFamily: 'inherit' }}>
+        <option value="CH">🇨🇭 +41</option>
+        <option value="GB">🇬🇧 +44</option>
+        <option value="CA">🇨🇦 +1</option>
+        <option value="AU">🇦🇺 +61</option>
+    </select>
+<input 
                   type="tel" 
                   name="phone"
                   placeholder="+1 (555) 000-0000" 
                   className="w-full rounded-2xl border border-primary/20 bg-secondary/40 px-4 py-3.5 text-sm text-ink outline-none transition-shadow focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(124,92,255,0.15)]" 
-                />
+                 style={{ flex: 1 }} />
+</div>
               </div>
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-ink">Message</label>

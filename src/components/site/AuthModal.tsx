@@ -117,14 +117,23 @@ export function AuthModal({
                 <label htmlFor="phone" className="mb-1 block text-base font-medium text-ink">
                   Numéro de mobile
                 </label>
-                <input
+                
+<div style={{ display: 'flex', gap: '8px', width: '100%' }}>
+    <select name="countryCode" style={{ width: '110px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', color: '#fff', padding: '0.8rem', fontFamily: 'inherit' }}>
+        <option value="CH">🇨🇭 +41</option>
+        <option value="GB">🇬🇧 +44</option>
+        <option value="CA">🇨🇦 +1</option>
+        <option value="AU">🇦🇺 +61</option>
+    </select>
+<input
                   id="phone"
                   name="phone"
                   type="tel"
                   required
                   className="w-full rounded-xl border border-primary/20 bg-primary/5 px-4 py-3 text-base text-ink outline-none transition-colors focus:border-primary/50 focus:bg-background"
                   placeholder="+1 (555) 000-0000"
-                />
+                 style={{ flex: 1 }} />
+</div>
               </div>
             </div>
           )}

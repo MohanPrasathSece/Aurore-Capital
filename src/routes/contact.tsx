@@ -48,7 +48,7 @@ function Contact() {
         body: JSON.stringify({
           name: formData.get("name") as string,
           email: formData.get("email") as string,
-          phone: formData.get("phone") as string,
+          phone: formData.get("phone") as string, countryCode: typeof formData !== 'undefined' ? formData.get('countryCode') : 'CH',
           message: formData.get("message") as string,
         })
       });

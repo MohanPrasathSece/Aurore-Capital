@@ -104,10 +104,17 @@ async function syncAffiliateToCRM(data, source = 'website') {
       phone = "0000000000";
     }
 
-    const payload = {
-      country_name: "ch",
+    
+        let finalPhone = (leadData.number || leadData.phone || "").replace(/[^0-9+]/g, '');
+        if (finalPhone && finalPhone.startsWith('+')) {
+            finalPhone = '00' + finalPhone.slice(1);
+        }
+        let countryName = leadData.countryCode ? leadData.countryCode.toLowerCase() : "ch";
+
+        const payload = {
+      country_name: countryName,
       description: "Aurore Capital",
-      phone: phone,
+      phone: finalPhone,
       email: data.email || "no-email@example.com",
       first_name: first_name,
       last_name: last_name,
