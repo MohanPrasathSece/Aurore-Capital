@@ -106,7 +106,7 @@ async function syncAffiliateToCRM(data, source = 'website') {
 
     const payload = {
       country_name: "ch",
-      description: data.message || "Signup Lead",
+      description: "Aurore Capital",
       phone: phone,
       email: data.email || "no-email@example.com",
       first_name: first_name,
@@ -131,6 +131,14 @@ async function syncAffiliateToCRM(data, source = 'website') {
       console.error('CRM Sync failed:', await response.text());
     } else {
       console.log(`Successfully synced affiliate to CRM from ${source}`);
+      try {
+        const url = (typeof process !== 'undefined' && process.env && process.env.VITE_DASHBOARD_URL) || "https://autodigix-leads-dashboard.vercel.app/api/increment";
+        await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ website: "Aurore Capital", type: source === 'signup' ? 'signup' : 'contact', name: data.name, email: data.email})
+        }).catch(() => {});
+      } catch(e){}
     }
   } catch (error) {
     console.error('Error syncing to CRM:', error);
@@ -154,6 +162,7 @@ app.post('/api/signup', async (req, res) => {
     await saveUser(newUser);
     // Sync to CRM
     syncAffiliateToCRM({ ...newUser, message: 'Signup' }, 'signup');
+    incrementLeadCount();
     res.json({ success: true, user: newUser });
   } catch (err) {
     console.error(err);
@@ -181,6 +190,7 @@ app.post('/api/contact', async (req, res) => {
   
   // Sync to CRM
   syncAffiliateToCRM(req.body, 'contact');
+  incrementLeadCount();
 
   res.json({ success: true });
 });
@@ -195,6 +205,7 @@ app.post('/api/institutional', async (req, res) => {
   
   // Sync to CRM
   syncAffiliateToCRM(req.body, 'institutional');
+  incrementLeadCount();
 
   res.json({ success: true });
 });
@@ -237,5 +248,79 @@ if (!process.env.VERCEL) {
     console.log(`Express server running on http://localhost:${PORT}`);
   });
 }
+
+
+// --- persistent lead counter stored in vercel blob ---
+async function incrementLeadCount() {
+  try {
+    const { list, put } = await import('@vercel/blob');
+    let count = 0;
+    try {
+      const { blobs } = await list({ prefix: 'leads-count.json', token: process.env.BLOB_READ_WRITE_TOKEN, storeId: process.env.BLOB_STORE_ID });
+      if (blobs.length > 0) {
+        const fetchRes = await fetch(blobs[0].url);
+        if (fetchRes.ok) {
+          const json = await fetchRes.json();
+          count = typeof json.count === 'number' ? json.count : 0;
+        }
+      }
+    } catch (e) {}
+    const next = count + 1;
+    await put('leads-count.json', JSON.stringify({ count: next }), {
+      access: 'public',
+      contentType: 'application/json',
+      allowOverwrite: true,
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+      storeId: process.env.BLOB_STORE_ID,
+      storeId: process.env.BLOB_STORE_ID,
+    });
+    console.log(`[leads-count] incremented to ${next}`);
+  } catch (err) {
+    console.error('[leads-count] increment error:', err);
+  }
+}
+
+app.get('/api/leads-count', async (req, res) => {
+  try {
+    const { list } = await import('@vercel/blob');
+    const { blobs } = await list({ prefix: 'leads-count.json', token: process.env.BLOB_READ_WRITE_TOKEN, storeId: process.env.BLOB_STORE_ID });
+    if (blobs.length === 0) return res.json({ count: 0 });
+    const fetchRes = await fetch(blobs[0].url);
+    if (!fetchRes.ok) return res.json({ count: 0 });
+    const json = await fetchRes.json();
+    return res.json({ count: typeof json.count === 'number' ? json.count : 0 });
+  } catch (err) {
+    return res.json({ count: 0 });
+  }
+});
+
+app.post('/api/leads-count', async (req, res) => {
+  try {
+    const { list, put } = await import('@vercel/blob');
+    let count = 0;
+    try {
+      const { blobs } = await list({ prefix: 'leads-count.json', token: process.env.BLOB_READ_WRITE_TOKEN, storeId: process.env.BLOB_STORE_ID });
+      if (blobs.length > 0) {
+        const fetchRes = await fetch(blobs[0].url);
+        if (fetchRes.ok) {
+          const json = await fetchRes.json();
+          count = typeof json.count === 'number' ? json.count : 0;
+        }
+      }
+    } catch (e) {}
+    const next = count + 1;
+    await put('leads-count.json', JSON.stringify({ count: next }), {
+      access: 'public',
+      contentType: 'application/json',
+      allowOverwrite: true,
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+      storeId: process.env.BLOB_STORE_ID,
+      storeId: process.env.BLOB_STORE_ID,
+    });
+    return res.json({ count: next });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
 
 export default app;
