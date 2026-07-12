@@ -29,6 +29,29 @@ function Contact() {
 
     if (phone !== null) {
       const cleanNum = phone.replace(/\s+/g, "");
+    const phoneLengths: Record<string, number> = {
+      FR: 9, CH: 9, BE: 9, CA: 10, US: 10, GB: 10, DE: 10, ES: 9, IT: 10, NL: 9, SE: 9, AU: 9, IN: 10, AE: 9, SG: 8, ZA: 9, BR: 11, MX: 10, JP: 10, CY: 8
+    };
+    const cCode = typeof data !== 'undefined' && data.countryCode ? data.countryCode : (typeof countryCode !== 'undefined' ? countryCode : 'CH');
+    const expectedLen = phoneLengths[cCode as string] || 9;
+    if (cleanNum && (cleanNum.length < expectedLen - 1 || cleanNum.length > expectedLen + 2)) {
+      if (typeof setPhoneError !== 'undefined') {
+        setPhoneError(`Veuillez entrer un numéro valide pour le pays sélectionné (${expectedLen} chiffres attendus)`);
+        if (typeof setIsSubmitting !== 'undefined') setIsSubmitting(false);
+        if (typeof setLoading !== 'undefined') setLoading(false);
+        return;
+      }
+      if (typeof setError !== 'undefined') {
+        setError(`Veuillez entrer un numéro valide pour le pays sélectionné (${expectedLen} chiffres attendus)`);
+        if (typeof setIsSubmitting !== 'undefined') setIsSubmitting(false);
+        if (typeof setLoading !== 'undefined') setLoading(false);
+        return;
+      }
+      if (typeof errs !== 'undefined') {
+        errs.phone = `Veuillez entrer un numéro valide pour le pays sélectionné (${expectedLen} chiffres attendus)`;
+      }
+    }
+
       if (!cleanNum) {
         setErrorMsg("Veuillez entrer un numéro de téléphone");
         setLoading(false);
