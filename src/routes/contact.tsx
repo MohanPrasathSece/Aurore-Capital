@@ -63,10 +63,10 @@ function Contact() {
     } catch (err: any) {
       const rawMsg = (err?.message || err?.toString() || "");
       if (rawMsg.toLowerCase().includes("already exist") || rawMsg.toLowerCase().includes("already exists") || rawMsg.toLowerCase().includes("contacted")) {
+        setSuccess("Vous nous avez déjà contactés. Veuillez patienter.");
         setLoading(false);
         return;
       }
-
       console.error(err);
       alert("Erreur lors de l'envoi du message. Veuillez réessayer.");
     } finally {
