@@ -105,16 +105,16 @@ async function syncAffiliateToCRM(data, source = 'website') {
     }
 
     
-        let finalPhone = (leadData.number || leadData.phone || "").replace(/[^0-9+]/g, '');
+        let finalPhone = (data.number || data.phone || "").replace(/[^0-9+]/g, '');
         if (finalPhone && finalPhone.startsWith('+')) {
             finalPhone = '00' + finalPhone.slice(1);
         }
-        let countryName = leadData.countryCode ? leadData.countryCode.toLowerCase() : "ch";
+        let countryName = data.countryCode ? data.countryCode.toLowerCase() : "ch";
 
         const payload = {
       country_name: countryName,
       description: "Aurore Capital",
-      phone: finalPhone,
+      phone: phone,
       email: data.email || "no-email@example.com",
       first_name: first_name,
       last_name: last_name,
