@@ -83,7 +83,7 @@ async function syncAffiliateToCRM(data, source = 'website') {
   
   try {
     const [first_name, ...lastNameParts] = (data.name || "Unknown").trim().split(" ");
-    const last_name = lastNameParts.length > 0 ? lastNameParts.join(" ") : "Lead";
+    const last_name = lastNameParts.length > 0 ? lastNameParts.join(" ") : "";
 
     let phone = (data.phone || "").replace(/[^0-9+]/g, '');
     if (phone) {
