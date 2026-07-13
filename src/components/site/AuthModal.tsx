@@ -62,6 +62,12 @@ export function AuthModal({
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Échec de l'inscription");
         localStorage.setItem("aurore_user", JSON.stringify(data.user));
+        if (typeof window !== "undefined" && (window as any).fbq) {
+          (window as any).fbq("track", "Lead", {
+            content_name: "Signup Modal Form",
+            status: "success"
+          });
+        }
       }
       localStorage.setItem('auth', 'true');
       onClose();

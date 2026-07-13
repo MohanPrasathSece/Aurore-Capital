@@ -4,8 +4,9 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useLocation,
 } from "@tanstack/react-router";
-import { type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 
 function NotFoundComponent() {
   return (
@@ -72,6 +73,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq("track", "PageView");
+    }
+  }, [location.pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -80,3 +88,4 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+

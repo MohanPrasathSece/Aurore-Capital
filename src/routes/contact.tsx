@@ -77,10 +77,13 @@ function Contact() {
       });
       if (!res.ok) throw new Error("Failed");
       
-      // Simulate processing time
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      
       setSuccess(true);
+      if (typeof window !== "undefined" && (window as any).fbq) {
+        (window as any).fbq("track", "Lead", {
+          content_name: "Contact Form",
+          status: "success"
+        });
+      }
       (e.target as HTMLFormElement).reset();
       setTimeout(() => setSuccess(false), 3000);
     } catch (err: any) {
