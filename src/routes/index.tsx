@@ -42,7 +42,7 @@ import { DemoSection } from "@/components/site/DemoSection";
 
 function Index() {
   const { auth } = Route.useSearch();
-  const navigate = useNavigate();
+  const navigate = useNavigate({ from: "/" });
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-background text-foreground">
@@ -58,7 +58,7 @@ function Index() {
       {auth && (
         <AuthModal
           type={auth}
-          onClose={() => navigate({ search: (prev: any) => ({ ...prev, auth: undefined }) })}
+          onClose={() => navigate({ search: (prev) => ({ ...prev, auth: undefined }) })}
         />
       )}
     </main>

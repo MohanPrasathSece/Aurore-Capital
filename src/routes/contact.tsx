@@ -16,7 +16,7 @@ export const Route = createFileRoute("/contact")({
 
 function Contact() {
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState<boolean | string>(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -29,28 +29,6 @@ function Contact() {
 
     if (phone !== null) {
       const cleanNum = phone.replace(/\s+/g, "");
-    const phoneLengths: Record<string, number> = {
-      FR: 9, CH: 9, BE: 9, CA: 10, US: 10, GB: 10, DE: 10, ES: 9, IT: 10, NL: 9, SE: 9, AU: 9, IN: 10, AE: 9, SG: 8, ZA: 9, BR: 11, MX: 10, JP: 10, CY: 8
-    };
-    const cCode = typeof data !== 'undefined' && data.countryCode ? data.countryCode : (typeof countryCode !== 'undefined' ? countryCode : 'CH');
-    const expectedLen = phoneLengths[cCode as string] || 9;
-    if (cleanNum && (cleanNum.length < expectedLen - 1 || cleanNum.length > expectedLen + 2)) {
-      if (typeof setPhoneError !== 'undefined') {
-        setPhoneError(`Veuillez entrer un numéro valide pour le pays sélectionné (${expectedLen} chiffres attendus)`);
-        if (typeof setIsSubmitting !== 'undefined') setIsSubmitting(false);
-        if (typeof setLoading !== 'undefined') setLoading(false);
-        return;
-      }
-      if (typeof setError !== 'undefined') {
-        setError(`Veuillez entrer un numéro valide pour le pays sélectionné (${expectedLen} chiffres attendus)`);
-        if (typeof setIsSubmitting !== 'undefined') setIsSubmitting(false);
-        if (typeof setLoading !== 'undefined') setLoading(false);
-        return;
-      }
-      if (typeof errs !== 'undefined') {
-        errs.phone = `Veuillez entrer un numéro valide pour le pays sélectionné (${expectedLen} chiffres attendus)`;
-      }
-    }
 
       if (!cleanNum) {
         setErrorMsg("Veuillez entrer un numéro de téléphone");
@@ -125,8 +103,12 @@ function Contact() {
             <form onSubmit={handleSubmit} className="rounded-3xl border border-primary/10 bg-white p-6 sm:p-8 shadow-elevated md:p-10">
               {success ? (
                 <div className="text-center py-12">
-                  <h3 className="text-2xl font-bold text-ink">Message envoyé !</h3>
-                  <p className="mt-2 text-ink-soft">Nous vous répondrons sous peu.</p>
+                  <h3 className="text-2xl font-bold text-ink">
+                    {typeof success === 'string' ? "Déjà contacté" : "Message envoyé !"}
+                  </h3>
+                  <p className="mt-2 text-ink-soft">
+                    {typeof success === 'string' ? success : "Nous vous répondrons sous peu."}
+                  </p>
                 </div>
               ) : (
                 <>

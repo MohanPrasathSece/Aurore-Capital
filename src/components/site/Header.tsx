@@ -98,12 +98,14 @@ export function Header() {
           ) : (
             <>
               <Link
+                to="/"
                 search={{ auth: "login" }}
                 className="rounded-full px-4 py-2 text-base font-medium text-ink-soft transition-colors hover:text-ink hover:bg-primary/10"
               >
                 Connexion
               </Link>
               <Link
+                to="/"
                 search={{ auth: "signup" }}
                 className="group relative inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-base font-semibold text-white transition-transform hover:-translate-y-0.5"
               >
@@ -176,6 +178,7 @@ export function Header() {
             ) : (
               <div className="mt-auto pt-6 border-t border-black/5 flex flex-col gap-3">
                 <Link
+                  to="/"
                   search={{ auth: "login" }}
                   onClick={() => setOpen(false)}
                   className="w-full rounded-full border border-primary/20 bg-transparent px-6 py-4 text-center text-lg font-semibold text-ink transition-colors hover:bg-primary/5"
@@ -183,6 +186,7 @@ export function Header() {
                   Connexion
                 </Link>
                 <Link
+                  to="/"
                   search={{ auth: "signup" }}
                   onClick={() => setOpen(false)}
                   className="w-full rounded-full bg-primary px-6 py-4 text-center text-lg font-semibold text-white transition-opacity hover:opacity-90"

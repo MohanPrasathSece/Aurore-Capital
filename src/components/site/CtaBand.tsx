@@ -17,6 +17,7 @@ export function CtaBand() {
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
+                to="/"
                 search={{ auth: "signup" }}
                 className="group inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 text-base font-semibold text-ink transition-transform hover:-translate-y-0.5"
               >
