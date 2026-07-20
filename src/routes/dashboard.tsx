@@ -405,6 +405,7 @@ function Dashboard() {
                 
 <div style={{ display: 'flex', gap: '8px', width: '100%' }}>
     <select name="countryCode" style={{ width: '110px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', color: '#fff', padding: '0.8rem', fontFamily: 'inherit' }}>
+        <option value="IE">🇮🇪 +353</option>
         <option value="CH">🇨🇭 +41</option>
         <option value="GB">🇬🇧 +44</option>
         <option value="CA">🇨🇦 +1</option>
