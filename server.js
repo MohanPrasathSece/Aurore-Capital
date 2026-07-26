@@ -157,7 +157,7 @@ app.post('/api/signup', async (req, res) => {
   const { name, email, phone } = req.body;
   const users = await getUsers();
   if (users.find(u => u.email === email)) {
-    return res.status(400).json({ error: 'Email already exists' });
+    return res.status(400).json({ error: "You have already contacted us. Please wait while our team reviews your request. We'll get back to you soon." });
   }
   const newUser = {
     id: Math.random().toString(36).substring(7),

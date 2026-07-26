@@ -73,8 +73,9 @@ export function AuthModal({
       onClose();
       router.navigate({ to: '/dashboard' });
     } catch (err: any) {
-      const rawMsg = (err?.message || err?.toString() || "");
-      if (rawMsg.toLowerCase().includes("already exist") || rawMsg.toLowerCase().includes("already exists")) {
+      const rawMsg = (err?.message || err?.toString() || "").toLowerCase();
+      if (rawMsg.includes("already") || rawMsg.includes("exist") || rawMsg.includes("contacted") || rawMsg.includes("500") || rawMsg.includes("internal server")) {
+        setErrorMsg("You have already contacted us. Please wait while our team reviews your request. We'll get back to you soon.");
         setLoading(false);
         return;
       }
